@@ -54,6 +54,9 @@ const NftDetails = () => {
 
                   <div className=" d-flex align-items-center gap-2 single__nft-more">
                     <span>
+                    <i class="ri-global-line"></i>
+                    </span>
+                    <span>
                       <i class="ri-send-plane-line"></i>
                     </span>
                     <span>
@@ -77,13 +80,12 @@ const NftDetails = () => {
                 <h4 style={{color: 'gray', display: 'inline', marginLeft: 15}}>NEAR</h4>
 
                 <p className="my-4">{singleNft.desc}</p>
-                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30">
-                  <i class="ri-shopping-bag-line"></i>
-                  <Link to="/wallet">Clone</Link>
+                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{color: 'white'}}>
+                  <i class="ri-download-line"></i>Clone
                   {/* <h6>{singleNft.currentBid}</h6> */}
                 </button>
-                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{float: 'right'}} onClick={() => setShowModal(true)}>
-                  <i class="ri-shopping-bag-line"></i> Offer
+                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{float: 'right', color: 'white'}} onClick={() => setShowModal(true)}>
+                   Offer
                 </button>
                   {showModal && <Modal setShowModal={setShowModal} />}
               </div>

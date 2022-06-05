@@ -57,19 +57,21 @@ const Market = () => {
                   <div className="all__category__filter">
                     <select onChange={handleCategory}>
                       <option>All Categories</option>
-                      <option value="art">Art</option>
-                      <option value="music">Music</option>
-                      <option value="domain-name">Domain Name</option>
-                      <option value="virtual-world">Virtual World</option>
-                      <option value="trending-card">Trending Cards</option>
+                      <option value="art">NFT</option>
+                      <option value="music">Staking</option>
+                      <option value="domain-name">RUST</option>
+                      <option value="virtual-world">AssemblyScript</option>
+                      <option value="trending-card">Voting</option>
+                      <option value="trending-card">Whitelist</option>
+                      <option value="trending-card">Token</option>
                     </select>
                   </div>
 
                   <div className="all__items__filter">
                     <select onChange={handleItems}>
                       <option>All Items</option>
-                      <option value="single-item">Single Item</option>
-                      <option value="bundle">Bundle</option>
+                      <option value="single-item">Only Backend</option>
+                      <option value="bundle">Frontend + Backend</option>
                     </select>
                   </div>
                 </div>
@@ -77,9 +79,9 @@ const Market = () => {
                 <div className="filter__right">
                   <select onChange={handleSort}>
                     <option>Sort By</option>
-                    <option value="high">High Rate</option>
-                    <option value="mid">Mid Rate</option>
-                    <option value="low">Low Rate</option>
+                    <option value="high">Highest Price</option>
+                    <option value="mid">Lowest Price</option>
+                    <option value="low">Most Likes</option>
                   </select>
                 </div>
               </div>

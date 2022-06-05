@@ -9,36 +9,16 @@ const Modal = ({ setShowModal }) => {
         <span className="close__modal">
           <i class="ri-close-line" onClick={() => setShowModal(false)}></i>
         </span>
-        <h6 className="text-center text-light">Place a Bid</h6>
+        <h6 className="text-center text-light">Place your offer</h6>
         <p className="text-center text-light">
-          You must bid at least <span className="money">5.89 ETH</span>
+          You will get a copy if the owner accepts your offer.
         </p>
 
         <div className="input__item mb-4">
-          <input type="number" placeholder="00 : 00 ETH" />
+          <input type="number" placeholder="NEAR" />
         </div>
 
-        <div className="input__item mb-3">
-          <h6>Enter Quantity, 7 available</h6>
-          <input type="number" placeholder="Enter quantity" />
-        </div>
-
-        <div className=" d-flex align-items-center justify-content-between">
-          <p>You must bid at least</p>
-          <span className="money">5.89 ETH</span>
-        </div>
-
-        <div className=" d-flex align-items-center justify-content-between">
-          <p>Service Fee</p>
-          <span className="money">0.89 ETH</span>
-        </div>
-
-        <div className=" d-flex align-items-center justify-content-between">
-          <p>Total Bid Amount</p>
-          <span className="money">5.89 ETH</span>
-        </div>
-
-        <button className="place__bid-btn">Place a Bid</button>
+        <button className="place__bid-btn" onClick={() => setShowModal(false)}>Offer</button>
       </div>
     </div>
   );

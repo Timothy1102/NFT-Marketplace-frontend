@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
@@ -11,10 +11,17 @@ import "../styles/nft-details.css";
 
 import { Link } from "react-router-dom";
 
+import Modal from "../components/ui/Modal/Modal";
+
+// import { Modal, Button } from 'antd';
+
+
 const NftDetails = () => {
   const { id } = useParams();
 
   const singleNft = NFT__DATA.find((item) => item.id === id);
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -75,10 +82,10 @@ const NftDetails = () => {
                   <Link to="/wallet">Clone</Link>
                   {/* <h6>{singleNft.currentBid}</h6> */}
                 </button>
-                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{marginLeft: 50}}>
-                  <i class="ri-shopping-bag-line"></i>
-                  <Link to="/wallet">Offer</Link>
+                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{float: 'right'}} onClick={() => setShowModal(true)}>
+                  <i class="ri-shopping-bag-line"></i> Offer
                 </button>
+                  {showModal && <Modal setShowModal={setShowModal} />}
               </div>
             </Col>
           </Row>

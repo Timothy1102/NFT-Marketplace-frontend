@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Tag } from "antd";
 
 import "./nft-card.css";
-
-import Modal from "../Modal/Modal";
 
 const NftCard = (props) => {
   const { title, id, currentBid, creatorImg, imgUrl, creator, tags } =
     props.item;
-
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="single__nft__card" style={{ height: 430, border: "0.3px solid #5142fc",}}>
@@ -78,7 +73,7 @@ const NftCard = (props) => {
       </div>
 
       <div
-          className="d-inline-flex align-items-center gap-1 single__nft-seen"
+          className="d-flex align-items-center gap-1 single__nft-seen"
         >
           <span>
             <i class="ri-eye-line"></i> 234
@@ -92,21 +87,15 @@ const NftCard = (props) => {
           </span>
         </div>
 
-      <div className="float-right mt-2 d-flex align-items-center justify-content-between" style={{ marginLeft: 'auto'}}>
+      <div className=" mt-3 d-inline-flex align-items-center " >
         <button
           className="bid__btn d-flex align-items-center gap-1"
-          onClick={() => setShowModal(true)}
         >
           {/* <i class="ri-shopping-bag-line"></i> Clone */}
           <i class="ri-download-line"></i> Clone
         </button>
-
-        {showModal && <Modal setShowModal={setShowModal} />}
-
-        {/* <span className="history__link">
-          <Link to="#">View History</Link>
-        </span> */}
       </div>
+
     </div>
   );
 };

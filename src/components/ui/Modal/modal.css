@@ -13,7 +13,7 @@
   top: 50%;
   left: 50%;
   width: 500px;
-  height: 500px;
+  height: 230px;
   transform: translate(-50%, -50%);
   background: #343444 !important;
   border-radius: 5px;
@@ -28,12 +28,6 @@
   margin-bottom: 10px;
 }
 
-.single__modal .money {
-  color: #fff;
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-
 .input__item input {
   width: 100%;
   border: 1px solid rgba(221, 221, 221, 0.274);
@@ -45,10 +39,6 @@
   font-size: 0.8rem;
 }
 
-.input__item h6 {
-  font-size: 0.9rem;
-  color: #fff;
-}
 
 .place__bid-btn {
   padding: 7px 25px;
@@ -87,17 +77,10 @@
   .single__modal h6 {
     font-size: 0.9rem;
   }
+  
   .single__modal p {
     font-size: 0.8rem;
     margin-bottom: 0;
-  }
-
-  .money {
-    font-size: 0.8rem !important;
-  }
-
-  .input__item h6 {
-    font-size: 0.7rem;
   }
 
   .input__item input {

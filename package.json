@@ -1,7 +1,7 @@
 {
-  "name": "ecommerce-website-1",
+  "name": "NFT marketplace",
   "version": "0.1.0",
-  "private": true,
+  "main": "./src/index.js",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.15.0",

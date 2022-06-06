@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import { NFT__DATA } from "../assets/data/data";
 
-import LiveAuction from "../components/ui/Live-auction/LiveAuction";
+import Relevant from "../components/ui/Relevant-section/Relevant";
 
 import "../styles/nft-details.css";
 
@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import Modal from "../components/ui/Modal/Modal";
 
 // import { Modal, Button } from 'antd';
-
 
 const NftDetails = () => {
   const { id } = useParams();
@@ -27,20 +26,19 @@ const NftDetails = () => {
     <>
       <CommonSection title={singleNft.title} />
 
-      <section>
+      <section style={{paddingTop: 30}}>
         <Container>
           <Row>
-            <Col lg="6" md="6" sm="6">
-              <img
-                src={singleNft.imgUrl}
-                alt=""
-                className="w-100 single__nft-img"
-              />
-            </Col>
+            {/* <Col lg="6" md="6" sm="6">
+              <h5 style={{color: 'white', marginTop: 30}}>Description</h5>
+              <p>{singleNft.desc}</p>
+              <p>Tags: </p>
+              <p style={{color: 'cyan'}}>{singleNft.tags}</p>
+            </Col> */}
 
-            <Col lg="6" md="6" sm="6">
+            <Col lg="8" md="12" sm="12" style={{marginLeft: 'auto', marginRight: 'auto'}}>
               <div className="single__nft__content">
-                <h2 style={{color:'white'}}>{singleNft.title}</h2>
+                {/* <h2 style={{ color: "orange" }}>{singleNft.tags}</h2> */}
 
                 <div className=" d-flex align-items-center justify-content-between mt-4 mb-4">
                   <div className=" d-flex align-items-center gap-4 single__nft-seen">
@@ -54,7 +52,7 @@ const NftDetails = () => {
 
                   <div className=" d-flex align-items-center gap-2 single__nft-more">
                     <span>
-                    <i class="ri-global-line"></i>
+                      <i class="ri-global-line"></i>
                     </span>
                     <span>
                       <i class="ri-send-plane-line"></i>
@@ -65,36 +63,77 @@ const NftDetails = () => {
                   </div>
                 </div>
 
-                <div className="nft__creator d-inline-flex gap-3 align-items-center" style={{display: 'inline'}}>
+                <div
+                  className="nft__creator d-inline-flex gap-3 align-items-center"
+                  style={{ display: "inline" }}
+                >
                   <div className="creator__img">
                     <img src={singleNft.creatorImg} alt="" className="w-100" />
                   </div>
 
                   <div className="creator__detail">
-                    <p>Created By</p>
+                    <p>Owner</p>
                     <h6>{singleNft.creator}</h6>
                   </div>
                 </div>
 
-                <h1 style={{color: 'white', display: 'inline', marginLeft: 70, marginTop: 100}}>{singleNft.currentBid}</h1>
-                <h4 style={{color: 'gray', display: 'inline', marginLeft: 15}}>NEAR</h4>
+                <h1
+                  style={{
+                    color: "white",
+                    display: "inline",
+                    marginLeft: 70,
+                    marginTop: 100,
+                  }}
+                >
+                  {singleNft.currentBid}
+                </h1>
+                <h4
+                  style={{ color: "gray", display: "inline", marginLeft: 15 }}
+                >
+                  NEAR
+                </h4>
 
-                <p className="my-4">{singleNft.desc}</p>
-                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{color: 'white'}}>
-                  <i class="ri-download-line"></i>Clone
-                  {/* <h6>{singleNft.currentBid}</h6> */}
-                </button>
-                <button className="singleNft-btn d-inline-flex align-items-center gap-2 w-30" style={{float: 'right', color: 'white'}} onClick={() => setShowModal(true)}>
-                   Offer
-                </button>
+                <div style={{marginTop: 50}}>
+                  <button
+                    className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+                    style={{ float: "left", marginLeft: 300, color: "white" }}
+                  >
+                    <i class="ri-download-line"></i>Clone
+                    {/* <h6>{singleNft.currentBid}</h6> */}
+                  </button>
+
+                  <button
+                    className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+                    style={{ float: "right", marginRight: 300, color: "white" }}
+                    onClick={() => setShowModal(true)}
+                  >
+                  <i class="ri-shopping-cart-line"></i>  Offer
+                  </button>
                   {showModal && <Modal setShowModal={setShowModal} />}
+                </div>
+
+                <div style={{ border: "0.2px solid #ffa500", borderRadius: 20, marginTop: 130, paddingLeft: 40, paddingRight: 40}}>
+                  <h5 style={{ color: "white", marginTop: 30 }}>Brief</h5>
+                  <p className="my-4">{singleNft.desc}</p>
+                  <p style={{display: "inline"}}>Tags:  </p>
+                  <p style={{display: "inline", color: "cyan" }}> {singleNft.tags}</p>
+                </div>
+
+                <div style={{ marginTop: 40, border: "0.2px solid #ffa500", borderRadius: 20, paddingLeft: 40, paddingRight: 40 }}>
+                  <h5 style={{ color: "white", marginTop: 30 }}>Description</h5>
+                  <p>{singleNft.desc}</p>
+                </div>
               </div>
             </Col>
           </Row>
         </Container>
       </section>
 
-      <LiveAuction />
+      <hr style={{color: 'white'}} />
+
+      <div >
+      <Relevant />
+      </div>
     </>
   );
 };

@@ -23,7 +23,7 @@ const SellerSection = () => {
 
                 <div className="seller__content">
                   <h6>{item.sellerName}</h6>
-                  <h6>{item.currentBid} ETH</h6>
+                  <h7 style={{ color: 'gray'}}>Description</h7>
                 </div>
               </div>
             </Col>

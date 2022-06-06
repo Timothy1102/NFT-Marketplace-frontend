@@ -6,8 +6,8 @@ import { login, logout, conlog } from "../../utils";
 
 import { NavLink, Link } from "react-router-dom";
 
-import { Layout, Menu, Button, Dropdown } from 'antd';
-import 'antd/dist/antd.css';
+import { Layout, Menu, Button, Dropdown } from "antd";
+import "antd/dist/antd.css";
 
 const NAV__LINKS = [
   {
@@ -37,14 +37,11 @@ const NAV__LINKS = [
 ];
 
 const Header = () => {
-
   const menu = (
     <Menu>
-        <Menu.Item>
-            <div onClick={logout}>
-                Logout
-            </div>
-        </Menu.Item>
+      <Menu.Item>
+        <div onClick={logout}>Logout</div>
+      </Menu.Item>
     </Menu>
   );
 
@@ -102,26 +99,31 @@ const Header = () => {
           </div>
 
           <div className="nav__right d-flex align-items-center gap-5 ">
-          {window.walletConnection.isSignedIn() ? (
-            <Dropdown overlay={menu} placement="bottomLeft" arrow>
+            {window.walletConnection.isSignedIn() ? (
+              <Dropdown overlay={menu} placement="bottomLeft" arrow>
                 <button
-                    className="btn d-flex gap-2 align-items-center" style={{ color: 'white' , fontSize: '.8rem'}} >
-                    <span>
-                        <i class="ri-wallet-line"></i>
-                    </span>
+                  className="btn d-flex gap-2 align-items-center"
+                  style={{ color: "white", fontSize: ".8rem" }}
+                >
+                  <span>
+                    <i class="ri-wallet-line"></i>
+                  </span>
 
-                    {window.accountId}
+                  {window.accountId}
                 </button>
-            </Dropdown>
-        ) : (
-            <Button
+              </Dropdown>
+            ) : (
+              <button
+                className="btn d-flex gap-2 align-items-center"
+                style={{ color: "white", fontSize: ".8rem" }}
                 onClick={login}
-                type="primary"
-                shape="round"
-            >
+              >
+                <span>
+                  <i class="ri-wallet-line"></i>
+                </span>
                 Login
-            </Button>
-        )}
+              </button>
+            )}
 
             <span className="mobile__menu">
               <i class="ri-menu-line" onClick={toggleMenu}></i>

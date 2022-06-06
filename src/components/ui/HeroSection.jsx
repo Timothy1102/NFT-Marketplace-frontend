@@ -13,7 +13,7 @@ const HeroSection = () => {
           <Col lg="6" md="6">
             <div className="hero__content">
               <h2>
-                Discover Smart Contract collection buy & sell extraordinary
+                Discover Smart Contract template collection, buy & sell extraordinary
                 <span style={{display: 'block'}}>Smart Contract NFTs</span> 
               </h2>
               <p>

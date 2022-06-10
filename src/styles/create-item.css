@@ -42,3 +42,10 @@
   border-radius: 50px;
   margin-left: auto;
 }
+
+.create__item button {
+  padding: 7px 25px;
+  border: 1px solid #5142fc;
+  border-radius: 50px;
+  margin-left: auto;
+}

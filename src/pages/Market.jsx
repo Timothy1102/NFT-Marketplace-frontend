@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 
@@ -11,11 +11,54 @@ import { Container, Row, Col } from "reactstrap";
 import "../styles/market.css";
 
 const Market = () => {
-  const [data, setData] = useState(NFT__DATA);
+  const [data, setData] = useState([]);
 
-  const handleCategory = () => {};
+  const handleCategory = () => { };
 
-  const handleItems = () => {};
+  const handleItems = () => { };
+
+
+  useEffect(async () => {
+    try {
+      let data = await window.contractMarket.get_sales(
+        {
+          from_index: 0,
+          limit: 30
+        }
+      );
+
+      let use_data = await window.contractMarket.get_uses(
+        {
+          from_index: 0,
+          limit: 30
+        }
+      );
+
+      let use_condition = ""
+
+      let mapItemData = data.map(async item => {
+        let itemData = await window.contractNFT.nft_token({ token_id: item.token_id });
+
+        let useMapData = use_data.map(async use_item => {
+          if (use_item.token_id == item.token_id) {
+            use_condition = use_item.use_conditions;
+          }
+        })
+
+        return {
+          ...item,
+          itemData,
+          use_condition,
+        }
+      });
+
+      let dataNew = await Promise.all(mapItemData);
+      console.log("Data market: ", dataNew);
+      setData(dataNew);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   // ====== SORTING DATA BY HIGH, MID, LOW RATE =========
   const handleSort = (e) => {

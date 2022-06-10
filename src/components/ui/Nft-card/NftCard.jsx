@@ -1,14 +1,63 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { notification } from "antd";
+import { login } from "../../../utils";
 import "./nft-card.css";
 
 const NftCard = (props) => {
-  const { title, id, currentBid, creatorImg, imgUrl, creator, tags } =
-    props.item;
+  // const { title, id, selling_price, creatorImg, imgUrl, creator, tags, desc } =
+  //   props.item;
+
+  let item = props.item;
+
+  const creator = props.item.owner_id;
+  const id = props.item.token_id;
+  const selling_price = props.item.sale_conditions;
+  const using_price = props.item.use_condition;
+  const title = props.item.itemData.metadata.title;
+  const imgUrl = props.item.itemData.metadata.media;
+  const desc = props.item.itemData.metadata.description;
+  const tags = "near, blockchain";
+  const is_selling = props.item.is_selling;
+
+  function handleBuy() {
+    submitBuy(item);
+  }
+  async function submitBuy(item) {
+    console.log(item);
+    try {
+      if (!window.walletConnection.isSignedIn()) return login();
+      let nearBalance = await window.account.getAccountBalance();
+      if (nearBalance.available < parseInt(item.sale_conditions.amount)) {
+        notification["warning"]({
+          message: "You dont have enough NEAR",
+          description:
+            "your account does not have enough NEAR to purchase this item.",
+        });
+
+        return;
+      }
+
+      await window.contractMarket.offer(
+        {
+          nft_contract_id: item.nft_contract_id,
+          token_id: item.token_id,
+        },
+        300000000000000,
+        // 1
+        item.sale_conditions
+      );
+
+      console.log("this is it");
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  }
 
   return (
-    <div className="single__nft__card" style={{ height: 430, border: "0.3px solid #5142fc",}}>
+    <div
+      className="single__nft__card"
+    >
       {/* <div className="nft__img">
         <img src={imgUrl} alt="" className="w-100" />
       </div> */}
@@ -25,15 +74,22 @@ const NftCard = (props) => {
             <div>
               <h6>Owner</h6>
               <p style={{ color: "#b3acab" }}>{creator}</p>
-              {/* <h6>{creator}</h6> */}
             </div>
 
-            <div>
-              <h6>Price</h6>
-              <p>{currentBid} NEAR</p>
-              {/* <div className="d-inline-flex" style={{color:'gray'}}> NEAR</div> */}
-            </div>
+            <br />
+
           </div>
+            <div className="d-flex align-items-center gap-1 single__nft-seen" style={{ marginBottom: 8}}>
+              <span>
+                <i class="ri-eye-line"></i> 234
+              </span>
+              <span>
+                <i class="ri-heart-line"></i> 123
+              </span>
+              <span className="justify-content-between">
+                <i class="ri-download-fill"></i> 13
+              </span>
+            </div>
         </div>
       </div>
 
@@ -49,12 +105,7 @@ const NftCard = (props) => {
       >
         {/* <img src={imgUrl} alt="" className="w-100" /> */}
 
-        <p style={{ height: 200, color: "#c7bfbf", fontSize: 15 }}>
-          - This contract can: ... <br />
-          - Useful for: ... <br />
-          - Note: ... <br />
-          ...
-        </p>
+        <p style={{ height: 200, color: "#c7bfbf", fontSize: 15 }}>{desc}</p>
       </div>
 
       <div className="tags" style={{ marginTop: 4 }}>
@@ -72,30 +123,64 @@ const NftCard = (props) => {
           ) } */}
       </div>
 
-      <div
-          className="d-flex align-items-center gap-1 single__nft-seen"
-        >
-          <span>
-            <i class="ri-eye-line"></i> 234
-          </span>
-          <span >
-            <i class="ri-heart-line"></i> 123
-          </span>
-          <span className="justify-content-between">
-            <i class="ri-download-fill"></i> 13
-            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 19h18v2H3v-2zm10-5.828L19.071 7.1l1.414 1.414L12 17 3.515 8.515 4.929 7.1 11 13.17V2h2v11.172z" fill="rgba(220,167,167,1)"/></svg> 13 */}
-          </span>
+      <div className="creator__info-wrapper d-flex gap-3" style={{ marginTop: 10}}>
+        <div className="creator__info w-100 d-flex align-items-center justify-content-between">
+          <div>
+            <h6>Selling price</h6>
+            <p>{selling_price} NEAR</p>
+          </div>
+          <div>
+            <h6>Using price</h6>
+            <p>{using_price} NEAR</p>
+            {/* <div className="d-inline-flex" style={{color:'gray'}}> NEAR</div> */}
+          </div>
         </div>
-
-      <div className=" mt-3 d-inline-flex align-items-center " >
-        <button
-          className="bid__btn d-flex align-items-center gap-1"
-        >
-          {/* <i class="ri-shopping-bag-line"></i> Clone */}
-          <i class="ri-download-line"></i> Clone
-        </button>
       </div>
 
+          {is_selling ? 
+          (<div className=" d-inline-flex align-items-center justify-content-between">
+
+          <button
+            className="bid__btn d-flex align-items-center gap-1"
+            onClick={handleBuy}
+          >
+            <i class="ri-download-line"></i> Cancel
+          </button>
+        </div>) 
+          : 
+          (<div className=" d-inline-flex align-items-center justify-content-between">
+
+        <button
+          className="bid__btn d-flex align-items-center gap-1"
+          onClick={handleBuy}
+        >
+          <i class="ri-download-line"></i> Buy
+        </button>
+
+        <button
+          className="bid__btn d-flex align-items-center gap-1"
+          style={{ marginLeft: 90}}
+        >
+          <i class="ri-download-line"></i> Use
+        </button>
+      </div>)
+          }
+      {/* <div className=" d-inline-flex align-items-center justify-content-between">
+
+        <button
+          className="bid__btn d-flex align-items-center gap-1"
+          onClick={handleBuy}
+        >
+          <i class="ri-download-line"></i> Buy
+        </button>
+
+        <button
+          className="bid__btn d-flex align-items-center gap-1"
+          style={{ marginLeft: 90}}
+        >
+          <i class="ri-download-line"></i> Use
+        </button>
+      </div> */}
     </div>
   );
 };

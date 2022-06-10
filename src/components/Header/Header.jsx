@@ -23,6 +23,10 @@ const NAV__LINKS = [
     url: "/create",
   },
   {
+    display: "Mint",
+    url: "/mint",
+  },
+  {
     display: "List",
     url: "/list",
   },

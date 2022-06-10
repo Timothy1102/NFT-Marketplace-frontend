@@ -1,5 +1,5 @@
-const NFT_CONTRACT_NAME = process.env.NFT_CONTRACT_NAME ||'timthang.testnet'
-const MARKET_CONTRACT_NAME = process.env.MARKET_CONTRACT_NAME || 'messenger-near.testnet'
+const NFT_CONTRACT_NAME = process.env.NFT_CONTRACT_NAME ||'sc-nft.ast3ros.testnet'
+const MARKET_CONTRACT_NAME = process.env.MARKET_CONTRACT_NAME || 'nft-market.ast3ros.testnet'
 const FT_CONTRACT_NAME = process.env.FT_CONTRACT_NAME || 'timthang2.testnet'
 
 function getConfig(env) {

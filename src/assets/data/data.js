@@ -19,7 +19,7 @@ export const NFT__DATA = [
   {
     id: "01",
     title: "NFT marketplace template",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img01,
     creator: "timthang.testnet",
     creatorImg: ava01,
@@ -30,7 +30,7 @@ export const NFT__DATA = [
   {
     id: "02",
     title: "Staking template",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img02,
     creator: "mikasa.testnet",
     creatorImg: ava02,
@@ -41,7 +41,7 @@ export const NFT__DATA = [
   {
     id: "03",
     title: "Counter",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img03,
     creator: "roninnico.testnet",
     creatorImg: ava03,
@@ -52,7 +52,7 @@ export const NFT__DATA = [
   {
     id: "04",
     title: "FT token",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img04,
     creator: "jesuslovesyou.testnet",
     creatorImg: ava04,
@@ -63,7 +63,7 @@ export const NFT__DATA = [
   {
     id: "05",
     title: "Counter Rust",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img05,
     creator: "ereneager.testnet",
     creatorImg: ava05,
@@ -74,7 +74,7 @@ export const NFT__DATA = [
   {
     id: "06",
     title: "Guest Book",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img06,
     creator: "rainbow.testnet",
     creatorImg: ava06,
@@ -84,7 +84,7 @@ export const NFT__DATA = [
   {
     id: "07",
     title: "Social Media Smart Contract",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img07,
     creator: "howllycow.testnet",
     creatorImg: ava03,
@@ -94,7 +94,7 @@ export const NFT__DATA = [
   {
     id: "08",
     title: "Crowd Funding template",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img08,
     creator: "lilpump.testnet",
     creatorImg: ava04,
@@ -104,7 +104,7 @@ export const NFT__DATA = [
   {
     id: "09",
     title: "Whitelist",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam adipisci cupiditate officia, nostrum et deleniti vero corrupti facilis minima laborum nesciunt nulla error natus saepe illum quasi ratione suscipit tempore dolores. Recusandae, similique modi voluptates dolore repellat eum earum sint.",
+    desc: " voluptates dolore repellat eum earum sint.",
     imgUrl: img09,
     creator: "vi3tnaw.testnet",
     creatorImg: ava05,

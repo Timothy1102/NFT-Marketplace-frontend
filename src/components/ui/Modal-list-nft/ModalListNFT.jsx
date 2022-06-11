@@ -15,8 +15,8 @@ const ModalListNft = ({ setShowListModal, token_id }) => {
         try {
             if (selling_price && using_price && token_id) {
                 let sale_conditions = { 
-                    sale_condition: selling_price,
-                    use_condition: using_price,
+                    sale_condition: utils.format.parseNearAmount(selling_price.toString()),
+                    use_condition: utils.format.parseNearAmount(using_price.toString()),
                 }
 
                 // Check storage balance
@@ -58,7 +58,7 @@ const ModalListNft = ({ setShowListModal, token_id }) => {
 
     return (
         <div className="modal__wrapper" >
-            <div className="single__modal">
+            <div className="single__modal" style={{height: "auto"}}>
                 <span className="close__modal">
                     <i class="ri-close-line" onClick={() => setShowListModal(false)}></i>
                 </span>
@@ -68,7 +68,7 @@ const ModalListNft = ({ setShowListModal, token_id }) => {
                 </p>
 
                 <div className="input__item mb-4">
-                    <input onChange={(e) => setSellingPrice(e.target.value)} type="text" placeholder="selling price (NEAR)" />
+                    <input onChange={(e) => setSellingPrice(e.target.value)} type="number" placeholder="selling price (NEAR)" />
                 </div>
 
                 <p className="text-center text-light">
@@ -76,7 +76,7 @@ const ModalListNft = ({ setShowListModal, token_id }) => {
                 </p>
 
                 <div className="input__item mb-4">
-                    <input onChange={(e) => setUsingPrice(e.target.value)} type="text" placeholder="using price (NEAR)" />
+                    <input onChange={(e) => setUsingPrice(e.target.value)} type="number" placeholder="using price (NEAR)" />
                 </div>
 
                 <button className="place__bid-btn" onClick={handleListNft}>List</button>

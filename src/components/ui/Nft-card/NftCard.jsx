@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { notification } from "antd";
 import { login } from "../../../utils";
 import "./nft-card.css";
+import {utils} from "near-api-js"
 
 const NftCard = (props) => {
   // const { title, id, selling_price, creatorImg, imgUrl, creator, tags, desc } =
@@ -127,11 +128,11 @@ const NftCard = (props) => {
         <div className="creator__info w-100 d-flex align-items-center justify-content-between">
           <div>
             <h6>Selling price</h6>
-            <p>{selling_price} NEAR</p>
+            <p>{utils.format.formatNearAmount(selling_price)} NEAR</p>
           </div>
           <div>
             <h6>Using price</h6>
-            <p>{using_price} NEAR</p>
+            <p>{utils.format.formatNearAmount(using_price)} NEAR</p>
             {/* <div className="d-inline-flex" style={{color:'gray'}}> NEAR</div> */}
           </div>
         </div>

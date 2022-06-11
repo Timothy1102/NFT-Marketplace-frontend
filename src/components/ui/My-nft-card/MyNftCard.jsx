@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import {utils} from "near-api-js"
 import "./my-nft-card.css";
 import ModalTransferNft from "../Modal-transfer-nft/ModalTransferNFT";
 import ModalListNft from "../Modal-list-nft/ModalListNFT";
@@ -78,7 +78,6 @@ const MyNftCard = (props) => {
           borderRadius: 20,
         }}
       >
-        {/* <img src={imgUrl} alt="" className="w-100" /> */}
 
         <p style={{ height: 200, color: "#c7bfbf", fontSize: 15 }}>{desc}</p>
       </div>
@@ -98,12 +97,11 @@ const MyNftCard = (props) => {
         <div className="creator__info w-100 d-flex align-items-center justify-content-between">
           <div>
             <h6>Selling price</h6>
-            <p>{selling_price} NEAR</p>
+            <p>{utils.format.formatNearAmount(selling_price)} NEAR</p>
           </div>
           <div>
             <h6>Using price</h6>
-            <p>{using_price} NEAR</p>
-            {/* <div className="d-inline-flex" style={{color:'gray'}}> NEAR</div> */}
+            <p>{utils.format.formatNearAmount(using_price)} NEAR</p>
           </div>
         </div>
       </div>)    

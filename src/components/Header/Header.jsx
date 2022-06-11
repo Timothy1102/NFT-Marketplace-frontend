@@ -9,38 +9,58 @@ import { NavLink, Link } from "react-router-dom";
 import { Layout, Menu, Button, Dropdown } from "antd";
 import "antd/dist/antd.css";
 
-const NAV__LINKS = [
-  {
-    display: "Home",
-    url: "/home",
-  },
-  {
-    display: "Market",
-    url: "/market",
-  },
-  {
-    display: "Create",
-    url: "/create",
-  },
-  {
-    display: "Mint",
-    url: "/mint",
-  },
-  {
-    display: "List",
-    url: "/list",
-  },
-  {
-    display: "Contact",
-    url: "/contact",
-  },
-  {
-    display: "Profile",
-    url: "/wallet",
-  },
-];
+let NAV__LINKS = [];
 
 const Header = () => {
+
+  if (window.walletConnection.isSignedIn()) {
+    NAV__LINKS = [
+      {
+        display: "Home",
+        url: "/home",
+      },
+      {
+        display: "Market",
+        url: "/market",
+      },
+      {
+        display: "Create",
+        url: "/create",
+      },
+      {
+        display: "Mint",
+        url: "/mint",
+      },
+      {
+        display: "List",
+        url: "/list",
+      },
+      {
+        display: "Contact",
+        url: "/contact",
+      },
+      {
+        display: "Profile",
+        url: "/wallet",
+      },
+    ];
+  } else {
+    NAV__LINKS = [
+      {
+        display: "Home",
+        url: "/home",
+      },
+      {
+        display: "Market",
+        url: "/market",
+      },
+      {
+        display: "Contact",
+        url: "/contact",
+      },
+    ];
+  }
+
   const menu = (
     <Menu>
       <Menu.Item>

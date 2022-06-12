@@ -23,6 +23,7 @@ const NftCard = (props) => {
   const desc = props.item.itemData.metadata.description;
   const tags = "near, blockchain";
   const is_selling = props.item.is_selling;
+  const is_using = props.item.itemData.users;
 
   const nft_contract_id = nearConfig.nftContractName;
 
@@ -185,13 +186,22 @@ const NftCard = (props) => {
           <i class="ri-download-line"></i> Buy
         </button>
 
-        <button
+        {is_using.includes(window.accountId) ? 
+        (<button
+          className="bid__btn d-flex btn btn-success"
+          style={{ marginLeft: 110, padding: "4px 20px !important", borderRadius: 15}}
+        >
+          Using
+        </button>)
+         : 
+         (<button
           className="bid__btn d-flex align-items-center gap-1"
           style={{ marginLeft: 90}}
           onClick={handelUse}
         >
-          <i class="ri-download-line"></i> Use
-        </button>
+          Use
+        </button>)
+         }
       </div>)
           }
     </div>

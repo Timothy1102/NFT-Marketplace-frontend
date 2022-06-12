@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import {utils} from "near-api-js"
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
-import { NFT__DATA } from "../assets/data/data";
 
 import Relevant from "../components/ui/Relevant-section/Relevant";
 
@@ -13,53 +12,60 @@ import { Link } from "react-router-dom";
 
 import Modal from "../components/ui/Modal/Modal";
 
-// import { Modal, Button } from 'antd';
-
 const NftDetails = () => {
   const { id } = useParams();
-
   const [showModal, setShowModal] = useState(false);
-  const [singleNft, setSingleNft] = useState("this is it");
+  const [singleNft, setSingleNft] = useState();
+  const [selling_price, setSellingPrice] = useState("")
+  const [using_price, setUsingPrice] = useState("")
 
   useEffect(async () => {
-      let nft = await window.contractNFT.nft_token({
-        token_id: id
+    let nft = await window.contractNFT.nft_token({
+      token_id: id,
+    });
+    setSingleNft(nft);
+  }, []);
+
+  useEffect(async () => {
+    try {
+      let data = await window.contractMarket.get_sales({
+        from_index: 0,
+        limit: 20,
       });
-      // setSingleNft(data);
-      let data = "changed to this"
-      console.log("nft: ", data)
-  });
-
-  let data = "changed to this"
-  console.log("nft: ", data)
-  // let nft = window.contractNFT.nft_token({token_id: id.toString()});
-    // setSingleNft(nft);
-    // setSingleNft("changed it");
-    // let dataNew =  Promise.all(nft);
-    // console.log("log: ", nft)
-
-  // useEffect(async () => {
-  //   let nft =  window.contractNFT.nft_token({token_id: id.toString()});
-  //   // setSingleNft(nft);
-  //   setSingleNft("changed it");
-  //   console.log("log: ", nft)
-  // }, []);
-
-  // console.log("nft: ", singleNft)
-    // console.log("id: ", id.toString())
-  // const singleNft = NFT__DATA.find((item) => item.id === id);
+      let use_data = await window.contractMarket.get_uses({
+        from_index: 0,
+        limit: 20,
+      });
+      data.map(async (item) => {
+        use_data.map(async (use_item) => {
+          if ((use_item.token_id == item.token_id) & (item.token_id == id)) {
+            const sale = utils.format.formatNearAmount(item.sale_conditions);
+            const use = utils.format.formatNearAmount(use_item.use_conditions);
+            setSellingPrice(sale);
+            setUsingPrice(use);
+          }
+        });
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   return (
     <>
-      {/* <CommonSection title={singleNft.title} /> */}
-      <CommonSection title="title" />
-
-      {/* <section style={{paddingTop: 30}}>
+      {(singleNft !== undefined) &&
+        (<>
+          <CommonSection title={singleNft.metadata.title} />
+          <section style={{ paddingTop: 30 }}>
         <Container>
           <Row>
-            <Col lg="8" md="12" sm="12" style={{marginLeft: 'auto', marginRight: 'auto'}}>
+            <Col
+              lg="8"
+              md="12"
+              sm="12"
+              style={{ marginLeft: "auto", marginRight: "auto" }}
+            >
               <div className="single__nft__content">
-
                 <div className=" d-flex align-items-center justify-content-between mt-4 mb-4">
                   <div className=" d-flex align-items-center gap-4 single__nft-seen">
                     <span>
@@ -87,13 +93,10 @@ const NftDetails = () => {
                   className="nft__creator d-inline-flex gap-3 align-items-center"
                   style={{ display: "inline" }}
                 >
-                  <div className="creator__img">
-                    <img src={singleNft.creatorImg} alt="" className="w-100" />
-                  </div>
 
                   <div className="creator__detail">
                     <p>Owner</p>
-                    <h6>{singleNft.creator}</h6>
+                    <h6>{singleNft.owner_id}</h6>
                   </div>
                 </div>
 
@@ -105,7 +108,7 @@ const NftDetails = () => {
                     marginTop: 100,
                   }}
                 >
-                  {singleNft.currentBid}
+                  {selling_price}
                 </h1>
                 <h4
                   style={{ color: "gray", display: "inline", marginLeft: 15 }}
@@ -113,7 +116,23 @@ const NftDetails = () => {
                   NEAR
                 </h4>
 
-                <div style={{marginTop: 50}}>
+                <h1
+                  style={{
+                    color: "white",
+                    display: "inline",
+                    marginLeft: 70,
+                    marginTop: 100,
+                  }}
+                >
+                  {using_price}
+                </h1>
+                <h4
+                  style={{ color: "gray", display: "inline", marginLeft: 15 }}
+                >
+                  NEAR
+                </h4>
+
+                <div style={{ marginTop: 50 }}>
                   <button
                     className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
                     style={{ float: "left", marginLeft: 300, color: "white" }}
@@ -126,33 +145,52 @@ const NftDetails = () => {
                     style={{ float: "right", marginRight: 300, color: "white" }}
                     onClick={() => setShowModal(true)}
                   >
-                  <i class="ri-shopping-cart-line"></i>  Offer
+                    <i class="ri-shopping-cart-line"></i> Offer
                   </button>
                   {showModal && <Modal setShowModal={setShowModal} />}
                 </div>
 
-                <div style={{ border: "0.2px solid #ffa500", borderRadius: 20, marginTop: 130, paddingLeft: 40, paddingRight: 40}}>
+                <div
+                  style={{
+                    border: "0.2px solid #ffa500",
+                    borderRadius: 20,
+                    marginTop: 130,
+                    paddingLeft: 40,
+                    paddingRight: 40,
+                  }}
+                >
                   <h5 style={{ color: "white", marginTop: 30 }}>Brief</h5>
-                  <p className="my-4">{singleNft.desc}</p>
-                  <p style={{display: "inline"}}>Tags:  </p>
-                  <p style={{display: "inline", color: "cyan" }}> {singleNft.tags}</p>
+                  <p className="my-4">{singleNft.metadata.description}</p>
+                  <p style={{ display: "inline" }}>Tags: </p>
+                  <p style={{ display: "inline", color: "cyan" }}>
+                    {" "}
+                    {/* {singleNft.tags} */}
+                  </p>
                 </div>
 
-                <div style={{ marginTop: 40, border: "0.2px solid #ffa500", borderRadius: 20, paddingLeft: 40, paddingRight: 40 }}>
+                <div
+                  style={{
+                    marginTop: 40,
+                    border: "0.2px solid #ffa500",
+                    borderRadius: 20,
+                    paddingLeft: 40,
+                    paddingRight: 40,
+                  }}
+                >
                   <h5 style={{ color: "white", marginTop: 30 }}>Description</h5>
-                  <p>{singleNft.desc}</p>
+                  <p>{singleNft.metadata.description}</p>
                 </div>
               </div>
             </Col>
           </Row>
         </Container>
-      </section> */}
+      </section>
+         </>)
+      }
 
-      <hr style={{color: 'white'}} />
+      <hr style={{ color: "white" }} />
 
-      <div >
-      <Relevant />
-      </div>
+      <div>{/* <Relevant /> */}</div>
     </>
   );
 };

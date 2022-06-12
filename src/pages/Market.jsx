@@ -17,7 +17,6 @@ const Market = () => {
 
   const handleItems = () => { };
 
-
   useEffect(async () => {
     try {
       let data = await window.contractMarket.get_sales(

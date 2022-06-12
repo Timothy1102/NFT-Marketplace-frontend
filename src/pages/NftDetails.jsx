@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
@@ -18,27 +18,47 @@ import Modal from "../components/ui/Modal/Modal";
 const NftDetails = () => {
   const { id } = useParams();
 
-  const singleNft = NFT__DATA.find((item) => item.id === id);
-
   const [showModal, setShowModal] = useState(false);
+  const [singleNft, setSingleNft] = useState("this is it");
+
+  useEffect(async () => {
+      let nft = await window.contractNFT.nft_token({
+        token_id: id
+      });
+      // setSingleNft(data);
+      let data = "changed to this"
+      console.log("nft: ", data)
+  });
+
+  let data = "changed to this"
+  console.log("nft: ", data)
+  // let nft = window.contractNFT.nft_token({token_id: id.toString()});
+    // setSingleNft(nft);
+    // setSingleNft("changed it");
+    // let dataNew =  Promise.all(nft);
+    // console.log("log: ", nft)
+
+  // useEffect(async () => {
+  //   let nft =  window.contractNFT.nft_token({token_id: id.toString()});
+  //   // setSingleNft(nft);
+  //   setSingleNft("changed it");
+  //   console.log("log: ", nft)
+  // }, []);
+
+  // console.log("nft: ", singleNft)
+    // console.log("id: ", id.toString())
+  // const singleNft = NFT__DATA.find((item) => item.id === id);
 
   return (
     <>
-      <CommonSection title={singleNft.title} />
+      {/* <CommonSection title={singleNft.title} /> */}
+      <CommonSection title="title" />
 
-      <section style={{paddingTop: 30}}>
+      {/* <section style={{paddingTop: 30}}>
         <Container>
           <Row>
-            {/* <Col lg="6" md="6" sm="6">
-              <h5 style={{color: 'white', marginTop: 30}}>Description</h5>
-              <p>{singleNft.desc}</p>
-              <p>Tags: </p>
-              <p style={{color: 'cyan'}}>{singleNft.tags}</p>
-            </Col> */}
-
             <Col lg="8" md="12" sm="12" style={{marginLeft: 'auto', marginRight: 'auto'}}>
               <div className="single__nft__content">
-                {/* <h2 style={{ color: "orange" }}>{singleNft.tags}</h2> */}
 
                 <div className=" d-flex align-items-center justify-content-between mt-4 mb-4">
                   <div className=" d-flex align-items-center gap-4 single__nft-seen">
@@ -99,7 +119,6 @@ const NftDetails = () => {
                     style={{ float: "left", marginLeft: 300, color: "white" }}
                   >
                     <i class="ri-download-line"></i>Clone
-                    {/* <h6>{singleNft.currentBid}</h6> */}
                   </button>
 
                   <button
@@ -127,7 +146,7 @@ const NftDetails = () => {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
 
       <hr style={{color: 'white'}} />
 

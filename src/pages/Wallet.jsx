@@ -6,32 +6,6 @@ import { Container, Row, Col } from "reactstrap";
 
 import "../styles/wallet.css";
 
-const wallet__data = [
-  {
-    title: "Bitcoin",
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium accusamus repellat rerum consequatur explicabo? Reiciendis!",
-    icon: "ri-bit-coin-line",
-  },
-
-  {
-    title: "Coinbase",
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium accusamus repellat rerum consequatur explicabo? Reiciendis!",
-    icon: "ri-coin-line",
-  },
-
-  {
-    title: "Metamask",
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium accusamus repellat rerum consequatur explicabo? Reiciendis!",
-    icon: "ri-money-cny-circle-line",
-  },
-
-  {
-    title: "Authereum",
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium accusamus repellat rerum consequatur explicabo? Reiciendis!",
-    icon: "ri-bit-coin-line",
-  },
-];
-
 const Wallet = () => {
   const [nfts, setNFTs] = useState([]);
   const [sellingNft, setSellingNft] = useState([]);
@@ -151,7 +125,7 @@ const Wallet = () => {
                             id: item.token_id,
                             currentBid: "currentBID",
                             creator: item.owner_id,
-                            tags: "selling",
+                            tags: "not selling",
                             desc: item.metadata.description,
                             is_selling: false
                           }}

@@ -4,6 +4,9 @@ import { notification } from "antd";
 import { login } from "../../../utils";
 import "./nft-card.css";
 import {utils} from "near-api-js"
+import getConfig from '../../../config'
+
+const nearConfig = getConfig(process.env.NODE_ENV || 'development')
 
 const NftCard = (props) => {
   // const { title, id, selling_price, creatorImg, imgUrl, creator, tags, desc } =
@@ -21,9 +24,12 @@ const NftCard = (props) => {
   const tags = "near, blockchain";
   const is_selling = props.item.is_selling;
 
+  const nft_contract_id = nearConfig.nftContractName;
+
   function handleBuy() {
     submitBuy(item);
   }
+
   async function submitBuy(item) {
     console.log(item);
     try {
@@ -55,6 +61,26 @@ const NftCard = (props) => {
     }
   }
 
+  function handelUse() {
+    submitUse(nft_contract_id, id)
+  }
+
+
+  async function submitUse(nft_contract_id, token_id) {
+    try {
+      await window.contractMarket.apply_use(
+        {
+          nft_contract_id: nft_contract_id,
+          token_id: token_id,
+        },
+        300000000000000,
+        item.use_condition
+      );
+    } catch (e) {
+      console.log("Error: ", e);
+    }
+  }
+
   return (
     <div
       className="single__nft__card"
@@ -67,6 +93,7 @@ const NftCard = (props) => {
         <h5 className="nft__title" style={{ display: "inline" }}>
           <Link style={{ color: "orange" }} to={`/market/${id}`}>
             {title}
+            <span style={{ color: "gray", fontSize: "small" }}> #{id}</span>
           </Link>
         </h5>
 
@@ -161,27 +188,12 @@ const NftCard = (props) => {
         <button
           className="bid__btn d-flex align-items-center gap-1"
           style={{ marginLeft: 90}}
+          onClick={handelUse}
         >
           <i class="ri-download-line"></i> Use
         </button>
       </div>)
           }
-      {/* <div className=" d-inline-flex align-items-center justify-content-between">
-
-        <button
-          className="bid__btn d-flex align-items-center gap-1"
-          onClick={handleBuy}
-        >
-          <i class="ri-download-line"></i> Buy
-        </button>
-
-        <button
-          className="bid__btn d-flex align-items-center gap-1"
-          style={{ marginLeft: 90}}
-        >
-          <i class="ri-download-line"></i> Use
-        </button>
-      </div> */}
     </div>
   );
 };

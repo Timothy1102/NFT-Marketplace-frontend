@@ -22,7 +22,7 @@ export async function initContract() {
         // View methods are read only. They don't modify the state, but usually return some value.
         viewMethods: ["storage_balance_of", "get_sales", "get_uses"],
         // Change methods can modify the state. But you don't receive the returned value when called.
-        changeMethods: ["offer"],
+        changeMethods: ["offer", "remove_sale", "apply_use"],
     });
 
     window.contractNFT = await new Contract(window.walletConnection.account(), nearConfig.nftContractName, {

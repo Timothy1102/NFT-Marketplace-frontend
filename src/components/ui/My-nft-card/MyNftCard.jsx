@@ -78,13 +78,13 @@ const MyNftCard = (props) => {
                 style={{ marginBottom: 8 }}
               >
                 <span>
-                  <i class="ri-eye-line"></i> 234
+                  <i className="ri-eye-line"></i> 234
                 </span>
                 <span>
-                  <i class="ri-heart-line"></i> 123
+                  <i className="ri-heart-line"></i> 123
                 </span>
                 <span className="justify-content-between">
-                  <i class="ri-download-fill"></i> 13
+                  <i className="ri-download-fill"></i> 13
                 </span>
               </div>
             </div>
@@ -136,7 +136,7 @@ const MyNftCard = (props) => {
             className="bid__btn d-flex align-items-center gap-1"
             onClick={handelCancel}
           >
-            <i class="ri-download-line"></i> Cancel
+            <i className="ri-close-circle-line"></i> Cancel
           </button>
         </div>
       ) : (

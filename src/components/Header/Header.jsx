@@ -99,9 +99,9 @@ const Header = () => {
           <div className="logo">
             <h2 className=" d-flex gap-2 align-items-center ">
               <span>
-                <i class="ri-fire-fill"></i>
+                <i className="ri-fire-fill"></i>
               </span>
-              Smart Contracts
+              dApps Marketplace
             </h2>
           </div>
 
@@ -130,7 +130,7 @@ const Header = () => {
                   style={{ color: "white", fontSize: ".8rem" }}
                 >
                   <span>
-                    <i class="ri-wallet-line"></i>
+                    <i className="ri-wallet-line"></i>
                   </span>
 
                   {window.accountId}
@@ -143,14 +143,14 @@ const Header = () => {
                 onClick={login}
               >
                 <span>
-                  <i class="ri-wallet-line"></i>
+                  <i className="ri-wallet-line"></i>
                 </span>
                 Login
               </button>
             )}
 
             <span className="mobile__menu">
-              <i class="ri-menu-line" onClick={toggleMenu}></i>
+              <i className="ri-menu-line" onClick={toggleMenu}></i>
             </span>
           </div>
         </div>

@@ -62,7 +62,7 @@ const Wallet = () => {
               <h3 className="trending__title">Selling Items</h3>
             </Col>
             {nfts.map((item) => {
-              console.log(item);
+              // console.log("selling item", item);
               item.is_selling = false;
               sellingNft.map((selling_item) => {
                 if (selling_item.token_id == item.token_id) {
@@ -75,7 +75,7 @@ const Wallet = () => {
                 <>
                   {item.is_selling &&
                     (<>
-                      <Col lg="3" md="4" sm="6" className="mb-4" key={item.id}>
+                      <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
                         <MyNftCard
                           item={{
                             title: item.metadata.title,
@@ -105,7 +105,7 @@ const Wallet = () => {
               <h3 className="trending__title">Other Items</h3>
             </Col>
             {nfts.map((item) => {
-              console.log(item);
+              // console.log("other item: ", item);
               item.is_selling = false;
               sellingNft.map((selling_item) => {
                 if (selling_item.token_id === item.token_id) {
@@ -118,7 +118,7 @@ const Wallet = () => {
                 <>
                   {(item.is_selling === false) &&
                     (<>
-                      <Col lg="3" md="4" sm="6" className="mb-4" key={item.id}>
+                      <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
                         <MyNftCard
                           item={{
                             title: item.metadata.title,

@@ -68,7 +68,7 @@ const LiveAuction = () => {
           </Col>
 
           {data.map((item) => (
-            <Col lg="3" md="4" sm="6" className="mb-4">
+            <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
               <NftCard key={item.id} item={item} />
             </Col>
           ))}

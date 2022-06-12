@@ -110,13 +110,13 @@ const NftCard = (props) => {
           </div>
             <div className="d-flex align-items-center gap-1 single__nft-seen" style={{ marginBottom: 8}}>
               <span>
-                <i class="ri-eye-line"></i> 234
+                <i className="ri-eye-line"></i> 234
               </span>
               <span>
-                <i class="ri-heart-line"></i> 123
+                <i className="ri-heart-line"></i> 123
               </span>
               <span className="justify-content-between">
-                <i class="ri-download-fill"></i> 13
+                <i className="ri-download-fill"></i> 13
               </span>
             </div>
         </div>
@@ -173,7 +173,7 @@ const NftCard = (props) => {
             className="bid__btn d-flex align-items-center gap-1"
             onClick={handleBuy}
           >
-            <i class="ri-download-line"></i> Cancel
+            <i class="ri-close-circle-line"></i> Cancel
           </button>
         </div>) 
           : 
@@ -183,7 +183,7 @@ const NftCard = (props) => {
           className="bid__btn d-flex align-items-center gap-1"
           onClick={handleBuy}
         >
-          <i class="ri-download-line"></i> Buy
+           Buy
         </button>
 
         {is_using.includes(window.accountId) ? 

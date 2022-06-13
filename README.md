@@ -1,7 +1,10 @@
 # NFT marketplace by React
 
-description
+`yarn`
+`yarn start`
 
 
+
+https://smart-contract-nft-marketplace.herokuapp.com/
 
 

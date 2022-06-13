@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { notification } from "antd";
 import { login } from "../../../utils";
 import "./nft-card.css";
-import {utils} from "near-api-js"
-import getConfig from '../../../config'
+import { utils } from "near-api-js";
+import getConfig from "../../../config";
+import { Container, Row, Col } from "reactstrap";
 
-const nearConfig = getConfig(process.env.NODE_ENV || 'development')
+const nearConfig = getConfig(process.env.NODE_ENV || "development");
 
 const NftCard = (props) => {
   // const { title, id, selling_price, creatorImg, imgUrl, creator, tags, desc } =
@@ -63,9 +64,8 @@ const NftCard = (props) => {
   }
 
   function handelUse() {
-    submitUse(nft_contract_id, id)
+    submitUse(nft_contract_id, id);
   }
-
 
   async function submitUse(nft_contract_id, token_id) {
     try {
@@ -83,58 +83,63 @@ const NftCard = (props) => {
   }
 
   return (
-    <div
-      className="single__nft__card"
-    >
-      {/* <div className="nft__img">
-        <img src={imgUrl} alt="" className="w-100" />
-      </div> */}
+    <div className="single__nft__card" id="nftcard">
+      <div className="nft__content ">
+        <Row>
+          <Col lg="3" style={{ marginRight: 15 }}>
+            <img
+              src={imgUrl}
+              alt="nft thumbnail"
+              className="d-inline-flex tw-rounded-full image-shadow tw-w-14 tw-h-14 "
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: "50px",
+                marginRight: 20,
+              }}
+            />
+          </Col>
+          <Col>
+            <h5 className="nft__title">
+              <Link
+                style={{ color: "orange", fontSize: 20 }}
+                to={`/market/${id}`}
+              >
+                {title}
+                <span style={{ color: "gray", fontSize: "small" }}> #{id}</span>
+              </Link>
+            </h5>
+          </Col>
+        </Row>
 
-      <div className="nft__content">
-        <h5 className="nft__title" style={{ display: "inline" }}>
-          <Link style={{ color: "orange" }} to={`/market/${id}`}>
-            {title}
-            <span style={{ color: "gray", fontSize: "small" }}> #{id}</span>
-          </Link>
-        </h5>
-
-        <div className="creator__info-wrapper d-flex gap-3">
+        {/* <div className="creator__info-wrapper d-flex gap-3">
           <div className="creator__info w-100 d-flex align-items-center justify-content-between">
             <div>
               <h6>Owner</h6>
               <p style={{ color: "#b3acab" }}>{creator}</p>
             </div>
-
             <br />
-
           </div>
-            <div className="d-flex align-items-center gap-1 single__nft-seen" style={{ marginBottom: 8}}>
-              <span>
-                <i className="ri-eye-line"></i> 234
-              </span>
-              <span>
-                <i className="ri-heart-line"></i> 123
-              </span>
-              <span className="justify-content-between">
-                <i className="ri-download-fill"></i> 13
-              </span>
-            </div>
-        </div>
+
+          <div className="d-flex align-items-center gap-1 single__nft-seen" style={{ marginBottom: 8 }}>
+            <span>
+              <i className="ri-eye-line"></i> 234
+            </span>
+            <span>
+              <i className="ri-heart-line"></i> 123
+            </span>
+            <span className="justify-content-between">
+              <i className="ri-download-fill"></i> 13
+            </span>
+          </div>
+        </div> */}
       </div>
 
-      <div
-        className="contract_des"
-        style={{
-          height: 200,
-          border: "0.3px solid #ffa500",
-          padding: "5px 10px",
-          marginTop: 10,
-          borderRadius: 20,
-        }}
-      >
+      <div id="description" className="contract_des">
         {/* <img src={imgUrl} alt="" className="w-100" /> */}
 
-        <p style={{ height: 200, color: "#c7bfbf", fontSize: 15 }}>{desc}</p>
+        <p style={{ height: 100, color: "#c7bfbf", fontSize: 15 }}>{desc}</p>
+        <p style={{ color: "#b3acab" }}>{creator}</p>
       </div>
 
       <div className="tags" style={{ marginTop: 4 }}>
@@ -152,7 +157,10 @@ const NftCard = (props) => {
           ) } */}
       </div>
 
-      <div className="creator__info-wrapper d-flex gap-3" style={{ marginTop: 10}}>
+      <div
+        className="creator__info-wrapper d-flex gap-3"
+        style={{ marginTop: 10 }}
+      >
         <div className="creator__info w-100 d-flex align-items-center justify-content-between">
           <div>
             <h6>Selling price</h6>
@@ -166,44 +174,46 @@ const NftCard = (props) => {
         </div>
       </div>
 
-          {is_selling ? 
-          (<div className=" d-inline-flex align-items-center justify-content-between">
-
+      {is_selling ? (
+        <div className=" d-inline-flex align-items-center justify-content-between">
           <button
             className="bid__btn d-flex align-items-center gap-1"
             onClick={handleBuy}
           >
             <i class="ri-close-circle-line"></i> Cancel
           </button>
-        </div>) 
-          : 
-          (<div className=" d-inline-flex align-items-center justify-content-between">
+        </div>
+      ) : (
+        <div className=" d-inline-flex align-items-center justify-content-between">
+          <button
+            className="bid__btn d-flex align-items-center gap-1"
+            onClick={handleBuy}
+          >
+            Buy
+          </button>
 
-        <button
-          className="bid__btn d-flex align-items-center gap-1"
-          onClick={handleBuy}
-        >
-           Buy
-        </button>
-
-        {is_using.includes(window.accountId) ? 
-        (<button
-          className="bid__btn d-flex btn btn-success"
-          style={{ marginLeft: 110, padding: "4px 20px !important", borderRadius: 15}}
-        >
-          Using
-        </button>)
-         : 
-         (<button
-          className="bid__btn d-flex align-items-center gap-1"
-          style={{ marginLeft: 90}}
-          onClick={handelUse}
-        >
-          Use
-        </button>)
-         }
-      </div>)
-          }
+          {is_using.includes(window.accountId) ? (
+            <button
+              className="bid__btn d-flex btn btn-success"
+              style={{
+                marginLeft: 110,
+                padding: "4px 20px !important",
+                borderRadius: 15,
+              }}
+            >
+              Using
+            </button>
+          ) : (
+            <button
+              className="bid__btn d-flex align-items-center gap-1"
+              style={{ marginLeft: 90 }}
+              onClick={handelUse}
+            >
+              Use
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

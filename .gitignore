@@ -3,3 +3,7 @@
 /node_modules
 
 .DS_Store
+
+/src/pages/.env
+
+/src/test.js

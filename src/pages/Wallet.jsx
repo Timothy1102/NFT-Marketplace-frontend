@@ -21,6 +21,8 @@ const Wallet = () => {
     }
   }, []);
 
+  console.log("my nft: ", nfts)
+
   useEffect(async () => {
     if (window.accountId) {
       let selling_nft = await window.contractMarket.get_sales({

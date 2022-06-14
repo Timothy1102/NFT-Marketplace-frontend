@@ -3,11 +3,7 @@ import { utils } from "near-api-js";
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
-import {
-	CheckCircleTwoTone,
-	HeartTwoTone,
-	SmileTwoTone,
-} from "@ant-design/icons";
+import { EyeTwoTone, CheckCircleTwoTone, HeartTwoTone} from "@ant-design/icons";
 import Relevant from "../components/ui/Relevant-section/Relevant";
 import "../styles/nft-details.css";
 import Modal from "../components/ui/Modal/Modal";
@@ -65,13 +61,11 @@ const NftDetails = () => {
 				}
 			});
 			let dataNew = await Promise.all(mapItemData);
-			// console.log("nft detail: ", datanft);
 		} catch (e) {
 			console.log(e);
 		}
 	}, []);
 
-	// sorry for this complicated code @.@
 	useEffect(async () => {
 		try {
 			let data = await window.contractMarket.get_sales({
@@ -196,19 +190,11 @@ const NftDetails = () => {
 								>
 									<div className="single__nft__content">
 										<div className=" d-flex align-items-center justify-content-between mt-4 mb-4">
-											<div className=" d-flex align-items-center gap-4 single__nft-seen">
-												<span>
-													<i class="ri-eye-line"></i>{" "}
-													234
-												</span>
-												<span>
-													<i class="ri-heart-line"></i>{" "}
-													123
-												</span>
-												<SmileTwoTone />
-												<HeartTwoTone twoToneColor="#eb2f96" />
-												<CheckCircleTwoTone twoToneColor="#52c41a" />
-											</div>
+										<div className=" d-flex align-items-center gap-3 single__nft-seen">
+											<EyeTwoTone twoToneColor="#ffa500"/> <span>53</span>
+											<HeartTwoTone twoToneColor="#eb2f96" /> <span>34</span>
+											<CheckCircleTwoTone twoToneColor="#52c41a" /> <span>15</span>
+										</div>
 
 											<div className=" d-flex align-items-center gap-2 single__nft-more">
 												<span>
@@ -438,16 +424,6 @@ const NftDetails = () => {
 														Use
 													</button>
 												)}
-												{/* <button
-													className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
-													style={{
-														float: "right",
-														marginRight: 200,
-													}}
-													onClick={handelUse}
-												>
-													Use
-												</button> */}
 
 												<button
 													className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
@@ -516,10 +492,7 @@ const NftDetails = () => {
 					</section>
 				</>
 			)}
-
 			<hr style={{ color: "white" }} />
-
-			<div>{/* <Relevant /> */}</div>
 		</>
 	);
 };

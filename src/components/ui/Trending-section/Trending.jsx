@@ -15,14 +15,14 @@ const Trending = () => {
       let data = await window.contractMarket.get_sales(
         {
           from_index: 0,
-          limit: 10
+          limit: 8
         }
       );
 
       let use_data = await window.contractMarket.get_uses(
         {
           from_index: 0,
-          limit: 10
+          limit: 30
         }
       );
 
@@ -57,7 +57,7 @@ const Trending = () => {
       <Container>
         <Row>
           <Col lg="12" className="mb-5">
-            <h3 className="trending__title">Latest Item</h3>
+            <h3 className="trending__title">Trending</h3>
           </Col>
 
           {data.map((item) => (

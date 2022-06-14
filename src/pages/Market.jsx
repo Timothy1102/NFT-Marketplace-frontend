@@ -57,7 +57,6 @@ const Market = () => {
     if (filterValue === "high") {
       const filterData = data.filter((item) => parseFloat(utils.format.formatNearAmount(item.use_condition)) >= 5
       );
-
       setData(filterData);
     }
 
@@ -72,7 +71,6 @@ const Market = () => {
       const filterData = data.filter(
         (item) => parseFloat(utils.format.formatNearAmount(item.use_condition)) <3
       );
-
       setData(filterData);
     }
   };
@@ -112,6 +110,7 @@ const Market = () => {
                 <div className="filter__right">
                   <select onChange={handleSort}>
                     <option>Sort By</option>
+                    <option value="latest">Latest</option>
                     <option value="high">High Price</option>
                     <option value="mid">Mid Price</option>
                     <option value="low">Low Price</option>

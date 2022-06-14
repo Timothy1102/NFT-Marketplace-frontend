@@ -14,14 +14,14 @@ const LiveAuction = () => {
       let data = await window.contractMarket.get_sales(
         {
           from_index: 0,
-          limit: 20
+          limit: 8
         }
       );
 
       let use_data = await window.contractMarket.get_uses(
         {
           from_index: 0,
-          limit: 20
+          limit: 30
         }
       );
 

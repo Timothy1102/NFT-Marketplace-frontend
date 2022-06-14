@@ -6,6 +6,7 @@ import ModalTransferNft from "../Modal-transfer-nft/ModalTransferNFT";
 import ModalListNft from "../Modal-list-nft/ModalListNFT";
 import getConfig from "../../../config";
 import { Row, Col } from "reactstrap";
+import { EyeTwoTone, CheckCircleTwoTone, HeartTwoTone} from "@ant-design/icons";
 
 const nearConfig = getConfig(process.env.NODE_ENV || "development");
 
@@ -48,44 +49,10 @@ const MyNftCard = (props) => {
 
 	return (
 		<div className="single__nft__card">
-			{/* <div className="nft__img">
-        <img src={imgUrl} alt="" className="w-100" />
-      </div> */}
-
-			{/* <div className="nft__content">
-
-				<div className="creator__info-wrapper d-flex gap-3">
-					<div className="creator__info w-100 d-flex align-items-center justify-content-between gap-3">
-						<div>
-							<h6>Owner</h6>
-							<p style={{ color: "#b3acab" }}>{creator}</p>
-						</div>
-
-						<br />
-
-						<div>
-							<div
-								className="d-flex align-items-center gap-1 single__nft-seen"
-								style={{ marginBottom: 8 }}
-							>
-								<span>
-									<i className="ri-eye-line"></i> 234
-								</span>
-								<span>
-									<i className="ri-heart-line"></i> 123
-								</span>
-								<span className="justify-content-between">
-									<i className="ri-download-fill"></i> 13
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> */}
-
 			<div className="nft__content ">
 				<Row>
-					<Col lg="3" style={{ marginRight: 15 }}>
+					<Col lg="3" style={{ marginRight: 7 }}>
+						<a href={`/market/${id}`}>
 						<img
 							src={imgUrl}
 							alt="nft thumbnail"
@@ -97,6 +64,7 @@ const MyNftCard = (props) => {
 								marginRight: 20,
 							}}
 						/>
+						</a>
 					</Col>
 					<Col>
 						<h5 className="nft__title" style={{ marginBottom: 0 }}>
@@ -150,6 +118,12 @@ const MyNftCard = (props) => {
 			<p style={{ color: "gray", marginBottom: "0rem", fontSize: 14 }}>
 				Owner: {creator}
 			</p>
+
+			<div className=" d-flex align-items-center gap-2 single__nft-seen">
+				<EyeTwoTone twoToneColor="#ffa500"/> <span>53</span>
+				<HeartTwoTone twoToneColor="#eb2f96" /> <span>34</span>
+				<CheckCircleTwoTone twoToneColor="#52c41a" /> <span>15</span>
+			</div>
 
 			{is_selling && (
 				<div

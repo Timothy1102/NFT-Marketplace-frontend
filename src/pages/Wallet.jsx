@@ -82,13 +82,13 @@ const Wallet = () => {
                           item={{
                             title: item.metadata.title,
                             id: item.token_id,
-                            currentBid: "currentBID",
                             creator: item.owner_id,
-                            tags: "selling",
+                            tags: item.metadata.extra,
                             desc: item.metadata.description,
                             is_selling: true,
                             selling_price: item.selling_price,
-                            using_price: item.using_price
+                            using_price: item.using_price,
+                            imgUrl: item.metadata.media
                           }}
                         />
                       </Col> </>)
@@ -125,14 +125,15 @@ const Wallet = () => {
                           item={{
                             title: item.metadata.title,
                             id: item.token_id,
-                            currentBid: "currentBID",
                             creator: item.owner_id,
-                            tags: "not selling",
+                            tags: item.metadata.extra,
                             desc: item.metadata.description,
-                            is_selling: false
+                            is_selling: false,
+                            imgUrl: item.metadata.media
                           }}
                         />
-                      </Col> </>)
+                      </Col> 
+                      </>)
                   }
                 </>
               );

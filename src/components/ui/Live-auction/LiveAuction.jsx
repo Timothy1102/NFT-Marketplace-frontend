@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
-
+import MyNftCard from "../My-nft-card/MyNftCard";
 import NftCard from "../Nft-card/NftCard";
-// import { NFT__DATA } from "../../../assets/data/data.js";
-
-
 import "./live-auction.css";
 
 const LiveAuction = () => {
@@ -17,14 +14,14 @@ const LiveAuction = () => {
       let data = await window.contractMarket.get_sales(
         {
           from_index: 0,
-          limit: 10
+          limit: 20
         }
       );
 
       let use_data = await window.contractMarket.get_uses(
         {
           from_index: 0,
-          limit: 10
+          limit: 20
         }
       );
 
@@ -68,9 +65,35 @@ const LiveAuction = () => {
           </Col>
 
           {data.map((item) => (
-            <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
-              <NftCard key={item.id} item={item} />
-            </Col>
+            ((item.owner_id !== window.accountId) ? 
+            (
+              <>
+                <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
+                  <NftCard item={item} />
+                </Col>
+              </>
+            )
+            :
+            (
+              <>
+                <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
+                    <MyNftCard
+                      item={{
+                        title: item.itemData.metadata.title,
+                        id: item.token_id,
+                        creator: item.owner_id,
+                        tags: item.itemData.metadata.extra,
+                        desc: item.itemData.metadata.description,
+                        is_selling: true,
+                        selling_price: item.sale_conditions,
+                        using_price: item.use_condition,
+                        imgUrl: item.itemData.metadata.media,
+                      }}
+                    />
+                </Col> 
+              </>
+            )
+          )
           ))}
         </Row>
       </Container>

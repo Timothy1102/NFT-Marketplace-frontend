@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import CommonSection from "../components/ui/Common-section/CommonSection";
-
 import NftCard from "../components/ui/Nft-card/NftCard";
-
-import { NFT__DATA } from "../assets/data/data";
-
+import MyNftCard from "../components/ui/My-nft-card/MyNftCard";
 import { Container, Row, Col } from "reactstrap";
+import {utils} from "near-api-js"
 
 import "../styles/market.css";
 
@@ -25,32 +22,26 @@ const Market = () => {
           limit: 30
         }
       );
-
       let use_data = await window.contractMarket.get_uses(
         {
           from_index: 0,
           limit: 30
         }
       );
-
       let use_condition = ""
-
       let mapItemData = data.map(async item => {
         let itemData = await window.contractNFT.nft_token({ token_id: item.token_id });
-
         let useMapData = use_data.map(async use_item => {
           if (use_item.token_id == item.token_id) {
             use_condition = use_item.use_conditions;
           }
         })
-
         return {
           ...item,
           itemData,
           use_condition,
         }
       });
-
       let dataNew = await Promise.all(mapItemData);
       console.log("Data market: ", dataNew);
       setData(dataNew);
@@ -64,22 +55,22 @@ const Market = () => {
     const filterValue = e.target.value;
 
     if (filterValue === "high") {
-      const filterData = NFT__DATA.filter((item) => item.currentBid >= 6);
-
-      setData(filterData);
-    }
-
-    if (filterValue === "mid") {
-      const filterData = NFT__DATA.filter(
-        (item) => item.currentBid >= 5.5 && item.currentBid < 6
+      const filterData = data.filter((item) => parseFloat(utils.format.formatNearAmount(item.use_condition)) >= 5
       );
 
       setData(filterData);
     }
 
+    if (filterValue === "mid") {
+      const filterData = data.filter(
+        (item) => parseFloat(utils.format.formatNearAmount(item.use_condition)) >= 3 && parseFloat(utils.format.formatNearAmount(item.use_condition)) < 5
+      );
+      setData(filterData);
+    }
+
     if (filterValue === "low") {
-      const filterData = NFT__DATA.filter(
-        (item) => item.currentBid >= 4.89 && item.currentBid < 5.5
+      const filterData = data.filter(
+        (item) => parseFloat(utils.format.formatNearAmount(item.use_condition)) <3
       );
 
       setData(filterData);
@@ -121,18 +112,44 @@ const Market = () => {
                 <div className="filter__right">
                   <select onChange={handleSort}>
                     <option>Sort By</option>
-                    <option value="high">Highest Price</option>
-                    <option value="mid">Lowest Price</option>
-                    <option value="low">Most Likes</option>
+                    <option value="high">High Price</option>
+                    <option value="mid">Mid Price</option>
+                    <option value="low">Low Price</option>
                   </select>
                 </div>
               </div>
             </Col>
 
             {data?.map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
-                <NftCard item={item} />
-              </Col>
+              ((item.owner_id !== window.accountId) ? 
+                (
+                  <>
+                    <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
+                      <NftCard item={item} />
+                    </Col>
+                  </>
+                )
+                :
+                (
+                  <>
+                    <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
+                        <MyNftCard
+                          item={{
+                            title: item.itemData.metadata.title,
+                            id: item.token_id,
+                            creator: item.owner_id,
+                            tags: item.itemData.metadata.extra,
+                            desc: item.itemData.metadata.description,
+                            is_selling: true,
+                            selling_price: item.sale_conditions,
+                            using_price: item.use_condition,
+                            imgUrl: item.itemData.metadata.media,
+                          }}
+                        />
+                    </Col> 
+                  </>
+                )
+              )
             ))}
           </Row>
         </Container>

@@ -19,7 +19,7 @@ const Routers = () => {
       <Route path="/market" element={<Market />} />
       {/* <Route path="/create" element={<Create />} /> */}
       <Route path="/mint" element={<Mint />} />
-      <Route path="/list" element={<List />} />
+      {/* <Route path="/list" element={<List />} /> */}
       <Route path="/contact" element={<Contact />} />
       <Route path="/wallet" element={<Wallet />} />
       <Route path="/market/:id" element={<NftDetails />} />

@@ -48,16 +48,12 @@
   border: 1px solid #5142fc;
   border-radius: 50px;
   margin-left: auto;
+  color: #fff;
 }
 
-#loading {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 20px;
-  height: 20px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+.create__item button:hover {
+  background: white;
+  color: #5142fc;
 }
 
 @keyframes spin {

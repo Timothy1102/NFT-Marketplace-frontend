@@ -14,6 +14,8 @@ import Modal from "../components/ui/Modal/Modal";
 import getConfig from "../config";
 import { login } from "../utils";
 import { notification } from "antd";
+import ModalTransferNft from "../components/ui/Modal-transfer-nft/ModalTransferNFT";
+import ModalListNft from "../components/ui/Modal-list-nft/ModalListNFT";
 
 const nearConfig = getConfig(process.env.NODE_ENV || "development");
 
@@ -24,6 +26,7 @@ const NftDetails = () => {
 	const [datanft, setData] = useState();
 	const [selling_price, setSellingPrice] = useState("");
 	const [using_price, setUsingPrice] = useState("");
+	const [showListModal, setShowListModal] = useState(false);
 
 	useEffect(async () => {
 		let nft = await window.contractNFT.nft_token({
@@ -62,7 +65,7 @@ const NftDetails = () => {
 				}
 			});
 			let dataNew = await Promise.all(mapItemData);
-			console.log("nft detail: ", datanft);
+			// console.log("nft detail: ", datanft);
 		} catch (e) {
 			console.log(e);
 		}
@@ -73,11 +76,11 @@ const NftDetails = () => {
 		try {
 			let data = await window.contractMarket.get_sales({
 				from_index: 0,
-				limit: 20,
+				limit: 30,
 			});
 			let use_data = await window.contractMarket.get_uses({
 				from_index: 0,
-				limit: 20,
+				limit: 30,
 			});
 			data.map(async (item) => {
 				use_data.map(async (use_item) => {
@@ -150,9 +153,29 @@ const NftDetails = () => {
 		}
 	}
 
+	async function removeSale(nft_contract_id, token_id) {
+		try {
+			await window.contractMarket.remove_sale(
+				{
+					nft_contract_id: nft_contract_id,
+					token_id: token_id,
+				},
+				30000000000000,
+				1
+			);
+		} catch (e) {
+			console.log("Error: ", e);
+		}
+	}
+
+	function handelCancel() {
+		removeSale(nft_contract_id, id);
+	}
+
 	return (
 		<>
 			{console.log("single nft: ", singleNft)}
+			{console.log("nft detail: ", datanft)}
 			{singleNft !== undefined && (
 				<>
 					<CommonSection
@@ -264,8 +287,9 @@ const NftDetails = () => {
 											NEAR
 										</h4>
 
-										{singleNft.owner_id ===
-											window.accountId && (
+										{(singleNft.owner_id ===
+											window.accountId) &
+											(selling_price !== "") && (
 											<>
 												<div style={{ marginTop: 50 }}>
 													<button
@@ -276,7 +300,7 @@ const NftDetails = () => {
 															background:
 																"#e250e5",
 														}}
-														onClick={handleBuy}
+														onClick={handelCancel}
 													>
 														<i className="ri-close-circle-line"></i>
 														Delist
@@ -318,6 +342,54 @@ const NftDetails = () => {
 											</>
 										)}
 
+										{(singleNft.owner_id ===
+											window.accountId) &
+											(selling_price == "") && (
+											<>
+												<div className=" mt-3 d-flex align-items-center " style={{ marginBottom: "-80px", marginTop: 500}}>
+													<button
+														className="bid__btn d-flex align-items-center gap-1"
+														style={{ marginLeft: 300}}
+														onClick={() =>
+															setShowListModal(
+																true
+															)
+														}
+													>
+														List
+													</button>
+
+													<button
+														className="bid__btn d-flex align-items-center gap-1"
+														style={{
+															marginLeft: 100
+														}}
+														onClick={() =>
+															setShowModal(true)
+														}
+													>
+														Transfer
+													</button>
+													{showModal && (
+														<ModalTransferNft
+															setShowModal={
+																setShowModal
+															}
+															token_id={id}
+														/>
+													)}
+													{showListModal && (
+														<ModalListNft
+															setShowListModal={
+																setShowListModal
+															}
+															token_id={id}
+														/>
+													)}
+												</div>
+											</>
+										)}
+
 										{singleNft.owner_id !==
 											window.accountId && (
 											<div style={{ marginTop: 50 }}>
@@ -345,7 +417,13 @@ const NftDetails = () => {
 																color: "white",
 															}}
 														>
-															<CheckCircleTwoTone twoToneColor="#52c41a" style={{fontSize: 30}}/> Using
+															<CheckCircleTwoTone
+																twoToneColor="#52c41a"
+																style={{
+																	fontSize: 30,
+																}}
+															/>{" "}
+															Using
 														</div>
 													</>
 												) : (

@@ -36,7 +36,7 @@ const ModalListNft = ({ setShowListModal, token_id }) => {
                         msg: JSON.stringify(sale_conditions)
                     },
                     30000000000000, 
-                    utils.format.parseNearAmount("0.01"));
+                    utils.format.parseNearAmount("0.05"));
                 } else {
                     notification["warning"]({
                         message: 'Not Enough Storage Balance',
@@ -44,7 +44,6 @@ const ModalListNft = ({ setShowListModal, token_id }) => {
                           'Please deposit storage balance to list your NFT!',
                       });
                 }
-
             }
         } catch (e) {
             console.log("Transfer error: ", e);

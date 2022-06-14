@@ -190,16 +190,8 @@ const NftCard = (props) => {
 				</div>
 			</div>
 
-			{is_selling ? (
-				<div className=" d-inline-flex align-items-center justify-content-between">
-					<button
-						className="bid__btn d-flex align-items-center gap-1"
-						onClick={handleBuy}
-					>
-						<i class="ri-close-circle-line"></i> Cancel
-					</button>
-				</div>
-			) : (
+			{!is_selling &&
+        (
 				<div className=" d-inline-flex align-items-center justify-content-between">
 					<button
 						className="bid__btn d-flex align-items-center gap-1"

@@ -37,6 +37,7 @@ const Wallet = () => {
       let use_condition = ""
 
       let mapItemData = selling_nft.map(async item => {
+        let itemData = await window.contractNFT.nft_token({ token_id: item.token_id });
         let useMapData = use_data.map(async use_item => {
           if (use_item.token_id == item.token_id) {
             use_condition = use_item.use_conditions;
@@ -45,12 +46,14 @@ const Wallet = () => {
 
         return {
           ...item,
+          itemData,
           use_condition,
         }
       });
 
       let dataNew = await Promise.all(mapItemData);
       setSellingNft(dataNew);
+      // console.log("selling nft: ", sellingNft)
     }
   }, []);
 
@@ -64,7 +67,7 @@ const Wallet = () => {
               <h3 className="trending__title">Selling Items</h3>
             </Col>
             {nfts.map((item) => {
-              // console.log("selling item", item);
+              console.log("sellingNft: ", sellingNft);
               item.is_selling = false;
               sellingNft.map((selling_item) => {
                 if (selling_item.token_id == item.token_id) {
@@ -100,6 +103,31 @@ const Wallet = () => {
         </Container>
       </section>
 
+      <section style={{paddingBottom: 0}}>
+        <Container>
+          <Row>
+            <Col lg="12" className="mb-5">
+              <h3 className="trending__title">Using Items</h3>
+            </Col>
+            {sellingNft.map((item) => {
+                if (item.itemData.users.includes(window.accountId)) {
+                  item.selling_price = item.sale_conditions;
+                  item.using_price = item.use_condition;
+                  return (
+                    <>
+                      <Col lg="3" md="4" sm="6" className="mb-4" key={item.token_id}>
+                        <NftCard
+                          item={item}
+                        />
+                      </Col>
+                    </>
+                  )
+                }
+            })}
+          </Row>
+        </Container>
+      </section>
+
       <section style={{marginTop: 0}}>
         <Container>
           <Row>
@@ -107,7 +135,6 @@ const Wallet = () => {
               <h3 className="trending__title">Other Items</h3>
             </Col>
             {nfts.map((item) => {
-              // console.log("other item: ", item);
               item.is_selling = false;
               sellingNft.map((selling_item) => {
                 if (selling_item.token_id === item.token_id) {

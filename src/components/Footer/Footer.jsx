@@ -73,7 +73,7 @@ const Footer = () => {
                 <span>
                   <i className="ri-fire-fill"></i>
                 </span>
-                NFTs
+                dApps
               </h2>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.

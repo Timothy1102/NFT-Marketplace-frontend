@@ -3,7 +3,11 @@ import { utils } from "near-api-js";
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
-import {CheckCircleTwoTone,HeartTwoTone,SmileTwoTone} from "@ant-design/icons";
+import {
+	CheckCircleTwoTone,
+	HeartTwoTone,
+	SmileTwoTone,
+} from "@ant-design/icons";
 import Relevant from "../components/ui/Relevant-section/Relevant";
 import "../styles/nft-details.css";
 import Modal from "../components/ui/Modal/Modal";
@@ -28,45 +32,43 @@ const NftDetails = () => {
 		setSingleNft(nft);
 	}, []);
 
-  useEffect(async () => {
-    try {
-      let data = await window.contractMarket.get_sales(
-        {
-          from_index: 0,
-          limit: 30
-        }
-      );
-      let use_data = await window.contractMarket.get_uses(
-        {
-          from_index: 0,
-          limit: 30
-        }
-      );
-      let use_condition = ""
-      let mapItemData = data.map(async item => {
-        if (item.token_id == id) {
-          let itemData = await window.contractNFT.nft_token({ token_id: item.token_id });
-          let useMapData = use_data.map(async use_item => {
-            if (use_item.token_id == item.token_id) {
-              use_condition = use_item.use_conditions;
-              setData({...item, itemData, use_condition})
-            }
-          })
-          return {
-            ...item,
-            itemData,
-            use_condition,
-          }
-        }
-      });
-      let dataNew = await Promise.all(mapItemData);
-      console.log("nft detail: ", datanft);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+	useEffect(async () => {
+		try {
+			let data = await window.contractMarket.get_sales({
+				from_index: 0,
+				limit: 30,
+			});
+			let use_data = await window.contractMarket.get_uses({
+				from_index: 0,
+				limit: 30,
+			});
+			let use_condition = "";
+			let mapItemData = data.map(async (item) => {
+				if (item.token_id == id) {
+					let itemData = await window.contractNFT.nft_token({
+						token_id: item.token_id,
+					});
+					let useMapData = use_data.map(async (use_item) => {
+						if (use_item.token_id == item.token_id) {
+							use_condition = use_item.use_conditions;
+							setData({ ...item, itemData, use_condition });
+						}
+					});
+					return {
+						...item,
+						itemData,
+						use_condition,
+					};
+				}
+			});
+			let dataNew = await Promise.all(mapItemData);
+			console.log("nft detail: ", datanft);
+		} catch (e) {
+			console.log(e);
+		}
+	}, []);
 
-  // sorry for this complicated code @.@
+	// sorry for this complicated code @.@
 	useEffect(async () => {
 		try {
 			let data = await window.contractMarket.get_sales({
@@ -99,7 +101,7 @@ const NftDetails = () => {
 		}
 	}, []);
 
-  const nft_contract_id = nearConfig.nftContractName;
+	const nft_contract_id = nearConfig.nftContractName;
 	function handleBuy() {
 		submitBuy(datanft);
 	}
@@ -122,7 +124,6 @@ const NftDetails = () => {
 					token_id: item.token_id,
 				},
 				300000000000000,
-				// 1
 				item.sale_conditions
 			);
 		} catch (e) {
@@ -130,7 +131,7 @@ const NftDetails = () => {
 		}
 	}
 
-  function handelUse() {
+	function handelUse() {
 		submitUse(nft_contract_id, id);
 	}
 
@@ -151,6 +152,7 @@ const NftDetails = () => {
 
 	return (
 		<>
+			{console.log("single nft: ", singleNft)}
 			{singleNft !== undefined && (
 				<>
 					<CommonSection
@@ -202,6 +204,9 @@ const NftDetails = () => {
 												</span>
 												<span>
 													<i class="ri-discord-fill"></i>
+												</span>
+												<span>
+													<i class="ri-github-fill"></i>
 												</span>
 												<span>
 													<i class="ri-more-2-line"></i>
@@ -259,51 +264,135 @@ const NftDetails = () => {
 											NEAR
 										</h4>
 
-										<div style={{ marginTop: 50 }}>
-											<button
-												className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
-												style={{
-													float: "left",
-													marginLeft: 200,
-													color: "white",
-												}}
-                        onClick={handleBuy}
-											>
-												Buy
-											</button>
+										{singleNft.owner_id ===
+											window.accountId && (
+											<>
+												<div style={{ marginTop: 50 }}>
+													<button
+														className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+														style={{
+															float: "left",
+															marginLeft: 380,
+															background:
+																"#e250e5",
+														}}
+														onClick={handleBuy}
+													>
+														<i className="ri-close-circle-line"></i>
+														Delist
+													</button>
+												</div>
+												<div
+													style={{
+														border: "0.2px solid #4d4e4f",
+														borderRadius: 20,
+														marginTop: 130,
+														marginBottom: -100,
+														paddingLeft: 40,
+														paddingRight: 40,
+													}}
+												>
+													<h5
+														style={{
+															color: "orange",
+															marginTop: 20,
+														}}
+													>
+														Offers
+													</h5>
+													<textarea
+														name=""
+														id="offers"
+														rows="3"
+														placeholder=""
+														className="w-100"
+														style={{
+															background:
+																"#06102e",
+															border: "none",
+															borderRadius: 10,
+															marginBottom: 10,
+														}}
+													></textarea>
+												</div>
+											</>
+										)}
 
-											<button
-												className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
-												style={{
-													float: "right",
-													marginRight: 200,
-													color: "white",
-												}}
-												onClick={handelUse}
-											>
-												Use
-											</button>
+										{singleNft.owner_id !==
+											window.accountId && (
+											<div style={{ marginTop: 50 }}>
+												<button
+													className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+													style={{
+														float: "left",
+														marginLeft: 200,
+													}}
+													onClick={handleBuy}
+												>
+													Buy
+												</button>
 
-                      <button
-												className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
-												style={{
-													float: "right",
-													marginRight: 110,
-													color: "white",
-												}}
-												onClick={() =>
-													setShowModal(true)
-												}
-											>
-												Offer
-											</button>
+												{singleNft.users.includes(
+													window.accountId
+												) ? (
+													<>
+														<div
+															className=" d-inline-flex align-items-center gap-2 w-30"
+															style={{
+																float: "right",
+																marginRight: 200,
+																marginTop: 5,
+																color: "white",
+															}}
+														>
+															<CheckCircleTwoTone twoToneColor="#52c41a" style={{fontSize: 30}}/> Using
+														</div>
+													</>
+												) : (
+													<button
+														className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+														style={{
+															float: "right",
+															marginRight: 200,
+														}}
+														onClick={handelUse}
+													>
+														Use
+													</button>
+												)}
+												{/* <button
+													className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+													style={{
+														float: "right",
+														marginRight: 200,
+													}}
+													onClick={handelUse}
+												>
+													Use
+												</button> */}
 
-											{showModal && (
-												<Modal
-													setShowModal={setShowModal}
-												/>
-											)}
-										</div>
+												<button
+													className="singleNft-btn d-inline-flex align-items-center gap-2 w-30"
+													style={{
+														float: "right",
+														marginRight: 110,
+													}}
+													onClick={() =>
+														setShowModal(true)
+													}
+												>
+													Offer
+												</button>
+
+												{showModal && (
+													<Modal
+														setShowModal={
+															setShowModal
+														}
+													/>
+												)}
+											</div>
+										)}
 
 										<div
 											style={{
@@ -316,7 +405,7 @@ const NftDetails = () => {
 										>
 											<h5
 												style={{
-													color: "white",
+													color: "orange",
 													marginTop: 30,
 												}}
 											>

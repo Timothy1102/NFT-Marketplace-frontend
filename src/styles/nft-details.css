@@ -53,10 +53,10 @@
 .singleNft-btn {
   padding: 8px 25px;
   background: #5142fc;
+  color: #fff;
   border: none;
   outline: none;
   border-radius: 50px;
-
   transition: 0.3s;
   display: flex;
   align-items: center;

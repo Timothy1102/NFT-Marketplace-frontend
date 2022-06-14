@@ -32,10 +32,6 @@ const Header = () => {
         url: "/mint",
       },
       {
-        display: "List",
-        url: "/list",
-      },
-      {
         display: "Contact",
         url: "/contact",
       },

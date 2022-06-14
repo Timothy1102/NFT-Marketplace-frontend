@@ -75,10 +75,8 @@ const Footer = () => {
                 </span>
                 dApps
               </h2>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptate, quod repellat! Quis quos dolorum tenetur fuga?
-                Aspernatur rerum quae amet.
+              <p style={{color: "gray"}}>
+                Best place for developers and business to find partners and develope a better Web3 world.
               </p>
             </div>
           </Col>

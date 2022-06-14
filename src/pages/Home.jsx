@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <>
       <HeroSection />
+      <StepSection />
       <LiveAuction />
       <SellerSection />
       <Trending />
-      <StepSection />
     </>
   );
 };

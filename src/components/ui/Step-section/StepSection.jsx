@@ -18,7 +18,7 @@ const STEP__DATA = [
   },
 
   {
-    title: "Mint your NFTs",
+    title: "Mint your NFTs/dApps",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit eligendi, facilis voluptatum fugit illum ",
     icon: "ri-save-2-fill",
   },
@@ -36,7 +36,7 @@ const StepSection = () => {
       <Container>
         <Row>
           <Col lg="12" className="mb-4">
-            <h3 className="step__title">Create and sell your NFTs</h3>
+            <h3 className="step__title">Create and sell your dApps</h3>
           </Col>
 
           {STEP__DATA.map((item, index) => (

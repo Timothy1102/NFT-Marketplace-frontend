@@ -32,7 +32,7 @@ const Market = () => {
       let mapItemData = data.map(async item => {
         let itemData = await window.contractNFT.nft_token({ token_id: item.token_id });
         let useMapData = use_data.map(async use_item => {
-          if (use_item.token_id == item.token_id) {
+          if (use_item.token_id === item.token_id) {
             use_condition = use_item.use_conditions;
           }
         })

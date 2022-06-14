@@ -1,6 +1,5 @@
 const NFT_CONTRACT_NAME = process.env.NFT_CONTRACT_NAME ||'sc-nft.ast3ros.testnet'
 const MARKET_CONTRACT_NAME = process.env.MARKET_CONTRACT_NAME || 'nft-market.ast3ros.testnet'
-const FT_CONTRACT_NAME = process.env.FT_CONTRACT_NAME || 'timthang2.testnet'
 
 function getConfig(env) {
   switch (env) {
@@ -12,7 +11,6 @@ function getConfig(env) {
       nodeUrl: 'https://rpc.mainnet.near.org',
       nftContractName: NFT_CONTRACT_NAME,
       marketContractName: MARKET_CONTRACT_NAME,
-      ftContractName: FT_CONTRACT_NAME,
       walletUrl: 'https://wallet.near.org',
       helperUrl: 'https://helper.mainnet.near.org',
       explorerUrl: 'https://explorer.mainnet.near.org',
@@ -24,7 +22,6 @@ function getConfig(env) {
       nodeUrl: 'https://rpc.testnet.near.org',
       nftContractName: NFT_CONTRACT_NAME,
       marketContractName: MARKET_CONTRACT_NAME,
-      ftContractName: FT_CONTRACT_NAME,
       walletUrl: 'https://wallet.testnet.near.org',
       helperUrl: 'https://helper.testnet.near.org',
       explorerUrl: 'https://explorer.testnet.near.org',
@@ -35,7 +32,6 @@ function getConfig(env) {
       nodeUrl: 'https://rpc.betanet.near.org',
       nftContractName: NFT_CONTRACT_NAME,
       marketContractName: MARKET_CONTRACT_NAME,
-      ftContractName: FT_CONTRACT_NAME,
       walletUrl: 'https://wallet.betanet.near.org',
       helperUrl: 'https://helper.betanet.near.org',
       explorerUrl: 'https://explorer.betanet.near.org',
@@ -48,7 +44,6 @@ function getConfig(env) {
       walletUrl: 'http://localhost:4000/wallet',
       nftContractName: NFT_CONTRACT_NAME,
       marketContractName: MARKET_CONTRACT_NAME,
-      ftContractName: FT_CONTRACT_NAME,
     }
   case 'test':
   case 'ci':
@@ -57,7 +52,6 @@ function getConfig(env) {
       nodeUrl: 'https://rpc.ci-testnet.near.org',
       nftContractName: NFT_CONTRACT_NAME,
       marketContractName: MARKET_CONTRACT_NAME,
-      ftContractName: FT_CONTRACT_NAME,
       masterAccount: 'test.near',
     }
   case 'ci-betanet':
@@ -66,7 +60,6 @@ function getConfig(env) {
       nodeUrl: 'https://rpc.ci-betanet.near.org',
       nftContractName: NFT_CONTRACT_NAME,
       marketContractName: MARKET_CONTRACT_NAME,
-      ftContractName: FT_CONTRACT_NAME,
       masterAccount: 'test.near',
     }
   default:

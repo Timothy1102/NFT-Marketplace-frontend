@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import "./header.css";
 import { Container } from "reactstrap";
-
+import {utils} from "near-api-js"
 import { login, logout, conlog } from "../../utils";
 
 import { NavLink, Link } from "react-router-dom";
@@ -57,12 +57,19 @@ const Header = () => {
 	}
 
 	const menu = (
-		<Menu>
+		<Menu style={{ background: "#5142fc"}}>
 			<Menu.Item>
-				<div onClick={logout}>Logout</div>
+				<div onClick={logout} style={{fontSize: 18, color: "orange"}}>Logout</div>
+			</Menu.Item>
+			<Menu.Item>
+				<div onClick={deposit} style={{fontSize: 18, color: "orange"}}>Deposit Storage Balance</div>
 			</Menu.Item>
 		</Menu>
 	);
+
+	async function deposit () {
+		await window.contractMarket.storage_deposit({}, 30000000000000, utils.format.parseNearAmount("0.1"))
+	}
 
 	const headerRef = useRef(null);
 

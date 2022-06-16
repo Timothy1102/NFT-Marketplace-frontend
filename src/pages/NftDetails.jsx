@@ -4,7 +4,6 @@ import CommonSection from "../components/ui/Common-section/CommonSection";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import { EyeTwoTone, CheckCircleTwoTone, HeartTwoTone} from "@ant-design/icons";
-import Relevant from "../components/ui/Relevant-section/Relevant";
 import "../styles/nft-details.css";
 import Modal from "../components/ui/Modal/Modal";
 import getConfig from "../config";

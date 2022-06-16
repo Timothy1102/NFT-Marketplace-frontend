@@ -2,8 +2,6 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import NftCard from "../components/ui/Nft-card/NftCard";
-import img from "../assets/images/img-01.jpg";
-import avatar from "../assets/images/ava-01.png";
 import { utils } from "near-api-js";
 import "../styles/create-item.css";
 // import { NFTStorage} from 'nft.storage';

@@ -67,7 +67,7 @@ const MyNftCard = (props) => {
 						</a>
 					</Col>
 					<Col>
-						<h5 className="nft__title" style={{ marginBottom: 0 }}>
+						<h5 className="nft__title" style={{ marginBottom: 7 }}>
 							<Link
 								style={{ color: "white", fontSize: 20 }}
 								to={`/market/${id}`}

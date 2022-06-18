@@ -3,7 +3,6 @@ const MARKET_CONTRACT_NAME = process.env.MARKET_CONTRACT_NAME || 'market-nfts.te
 
 function getConfig(env) {
   switch (env) {
-
   case 'production':
   case 'mainnet':
     return {

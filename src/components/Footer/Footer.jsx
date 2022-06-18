@@ -73,7 +73,7 @@ const Footer = () => {
                 <span>
                   <i className="ri-fire-fill"></i>
                 </span>
-                dApps
+                DHub
               </h2>
               <p style={{color: "gray"}}>
                 Best place for developers and business to find partners and develope a better Web3 world.

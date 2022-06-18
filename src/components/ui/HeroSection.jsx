@@ -12,12 +12,12 @@ const HeroSection = () => {
         <Row>
           <Col lg="6" md="6">
             <div className="hero__content">
-              <h2>
-                Discover Smart Contract template collection, buy & sell extraordinary
-                <span style={{display: 'block'}}>Smart Contract NFTs</span> 
+              <h2 style={{display: "inline" }}>
+                Discover dApp collections, buy & sell extraordinary
+                <span style={{display: 'inline'}}>dApp NFTs</span> 
               </h2>
               <p>
-                Best place for developers and business to find partners and develope a better Web3 world.
+                Best place for developers, non-developers and business to find best products and develope a better Web3 world.
               </p>
 
               <div className="hero__btns d-flex align-items-center gap-4">

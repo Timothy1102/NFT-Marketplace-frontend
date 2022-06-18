@@ -107,7 +107,7 @@ const Header = () => {
 							<span>
 								<i className="ri-fire-fill"></i>
 							</span>
-							dApps Marketplace
+							DHub
 						</h2>
 						</Link>
 					</div>

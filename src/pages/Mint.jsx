@@ -19,10 +19,18 @@ const API_TOKEN =
 const Mint = () => {
 
 	const [contract, setContract] = useState([])
-	let contract_name = ""
+	let ref = ""
 
 	const handleChange = (value) => {
-		contract_name = value.value;
+		let contract_name = value.value;
+		// contract.map
+		for (let i in contract) {
+			if (contract[i].contract_name === contract_name) {
+				ref = contract[i].frontend_address
+				console.log("ref: ", ref)
+				console.log("ref: ", contract[i].frontend_address)
+			}
+		}
 		console.log("contract: ", contract_name); 
 	};
 
@@ -72,7 +80,7 @@ const Mint = () => {
 							description: desc,
 							media: imgUrl,
 							extra: tags,
-							reference: contract_name,
+							reference: ref,
 						},
 						receiver_id: window.accountId,
 						// perpetual_royalties: {

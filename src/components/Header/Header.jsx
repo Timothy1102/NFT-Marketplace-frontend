@@ -119,7 +119,7 @@ const Header = () => {
 					>
 						<ul className="nav__list">
 							{NAV__LINKS.map((item, index) => (
-								<li className="nav__item" key={index}>
+								<li className="nav__item" key={index} style={{fontWeight: 'bold'}}>
 									<NavLink
 										to={item.url}
 										className={(navClass) =>

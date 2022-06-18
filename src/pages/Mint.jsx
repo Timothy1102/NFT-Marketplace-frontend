@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 import CommonSection from "../components/ui/Common-section/CommonSection";
 import NftCard from "../components/ui/Nft-card/NftCard";
@@ -8,6 +8,8 @@ import "../styles/create-item.css";
 import { NFTStorage } from "nft.storage/dist/bundle.esm.min.js";
 import "dotenv/config";
 import { LoadingOutlined } from "@ant-design/icons";
+import { Select } from 'antd';
+const { Option } = Select;
 
 // personal api key for nft.storage
 // const API_TOKEN = process.env.API_TOKEN;
@@ -15,13 +17,37 @@ const API_TOKEN =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDYwMTQzZDA5RUI1MzQ4NzJGNDRiMTNCRDdlYjVDNDkyRjVBNjdEMDkiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1NDc4NTMzMTE1MiwibmFtZSI6Im5mdC10ZXN0In0.njpcXLyShGZJVQrnafDviw8JFpeOREU4-fSe3eEk3DI";
 
 const Mint = () => {
+
+	const [contract, setContract] = useState([])
+	let contract_name = ""
+
+	const handleChange = (value) => {
+		contract_name = value.value;
+		console.log("contract: ", contract_name); 
+	};
+
+	useEffect(async () => {
+		try {
+			let data = await window.contractMarket.get_created_contract_by_creator(
+				{
+					creator_id: window.accountId,
+				  	from_index: 0,
+				  	limit: 30
+				}
+			  ); 
+			setContract(data)
+			console.log("data: ", data)
+		} catch (e) {
+			console.log(e)
+		}
+	}, []);
+
+
 	async function mintNFT() {
 		document.getElementById("spin").style.visibility = "visible";
-
 		const title = document.getElementById("title").value;
 		const desc = document.getElementById("desc").value;
 		const tags = document.getElementById("tags").value;
-		const website = document.getElementById("website").value;
 		const file = document.querySelector('input[type="file"]');
 		if (!file.files.length) return console.log("No files selected");
 		const storage = new NFTStorage({ token: API_TOKEN });
@@ -46,7 +72,7 @@ const Mint = () => {
 							description: desc,
 							media: imgUrl,
 							extra: tags,
-							reference: website,
+							reference: contract_name,
 						},
 						receiver_id: window.accountId,
 						// perpetual_royalties: {
@@ -114,6 +140,21 @@ const Mint = () => {
 									</div>
 
 									<div className="form__input">
+										<label style={{display: "block"}} htmlFor="">Contract</label>
+										<Select
+											labelInValue
+											style={{
+											width: "100%",
+											}}
+											onChange={handleChange}
+										>
+											{contract.map(contract => (
+												<Option value={contract.contract_name}></Option>
+											))}
+										</Select>
+									</div>
+
+									{/* <div className="form__input">
 										<label htmlFor="">Website</label>
 										<textarea
 											name=""
@@ -122,7 +163,7 @@ const Mint = () => {
 											placeholder="link website"
 											className="w-100"
 										></textarea>
-									</div>
+									</div> */}
 								</form>
 
 								<LoadingOutlined id="spin" style={{ color: "white", fontSize: 35, visibility: "hidden" }} />

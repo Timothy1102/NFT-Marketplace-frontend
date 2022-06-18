@@ -2,7 +2,7 @@ const NFT_CONTRACT_NAME = process.env.NFT_CONTRACT_NAME ||'sc-nft.ast3ros.testne
 const MARKET_CONTRACT_NAME = process.env.MARKET_CONTRACT_NAME || 'market-nfts.testnet'
 
 function getConfig(env) {
-  switch ('testnet') {
+  switch ('development') {
 
   case 'production':
   case 'mainnet':

@@ -28,7 +28,6 @@ const Mint = () => {
 			if (contract[i].contract_name === contract_name) {
 				ref = contract[i].frontend_address
 				console.log("ref: ", ref)
-				console.log("ref: ", contract[i].frontend_address)
 			}
 		}
 		console.log("contract: ", contract_name); 

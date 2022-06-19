@@ -20,11 +20,9 @@ const Contact = () => {
         <Container>
           <Row>
             <Col lg="6" md="6" className="m-auto text-center">
-              <h2>Drop a Message</h2>
+              <h2 style={{color: "orange"}}>Drop a Message</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus ipsum aperiam cumque fugit suscipit animi natus
-                nostrum voluptatem iste quam!
+                write us a letter to describe your problem.
               </p>
               <div className="contact mt-4">
                 <form onSubmit={handleSubmit}>

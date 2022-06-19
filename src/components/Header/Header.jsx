@@ -22,10 +22,10 @@ const Header = () => {
 				display: "MARKET",
 				url: "/market",
 			},
-			{
-				display: "CREATE",
-				url: "/create",
-			},
+			// {
+			// 	display: "CREATE",
+			// 	url: "/create",
+			// },
 			{
 				display: "MINT",
 				url: "/mint",
@@ -130,6 +130,9 @@ const Header = () => {
 									</NavLink>
 								</li>
 							))}
+							<li className="nav__item"  style={{fontWeight: 'bold'}}>
+								<a target="_blank" href="http://45.76.185.234:8080/">CREATE</a>
+							</li>
 						</ul>
 					</div>
 

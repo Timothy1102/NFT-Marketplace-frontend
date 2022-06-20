@@ -27,7 +27,8 @@ const HeroSection = () => {
                 </button>
                 <button className=" create__btn d-flex align-items-center gap-2">
                   <i className="ri-ball-pen-line"></i>
-                  <Link to="/create">Create</Link>
+                  {/* <Link to="/create">Create</Link> */}
+                  <a target="_blank" href="http://45.76.185.234:8080/">Create</a>
                 </button>
               </div>
             </div>
